@@ -1,0 +1,298 @@
+﻿@model HotelOrderFinal.ViewModels.CRoomClassViewModel
+
+@{
+    ViewData["Title"] = "Detail";
+}
+<style>
+    .facility-list {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+    }
+
+        .facility-list li {
+            flex-basis: calc(100% / 6);
+            max-width: calc(100% / 6);
+            margin-bottom: 10px;
+        }
+
+
+    .myoverlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+    }
+
+    .my-modal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        border-radius: 8px;
+        padding: 10px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+
+
+    .modal-image {
+        max-width: 90%;
+        max-height: 90%;
+        
+    }
+
+    .close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 30px;
+        color: #7B7B7B;
+        cursor: pointer;
+    }
+
+    #thumbnail-container {
+        display: flex;
+    
+    }
+
+    .mythumbnail {
+        display: inline-block;       
+        padding: 4px;
+        line-height: 1.5;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;      
+
+        position: relative;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-right: 5px;
+    }
+
+        .mythumbnail:last-child {
+            margin-right: 0; 
+        }
+
+        .mythumbnail:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(128, 128, 128, 0.5);
+            border-radius: 8px;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .mythumbnail:hover:before {
+            opacity: 0;
+        }
+
+    .myenlarge-image {
+
+        width: 320px;
+        height: 240px;
+        object-fit: cover;
+        border: 2px solid #fff;
+        border-radius: 8px;
+        background-color: rgba(128, 128, 128, 0.5);
+    }
+
+    .fade-in-from-bottom {
+        opacity: 0.3; 
+        transform: translateX(3%); 
+        transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+    }
+
+        .fade-in-from-bottom.show {
+            opacity: 1;
+            transform: translateY(0); 
+        }
+
+/*    .bread {
+        padding: 10px; /* 調整內容的上下左右間距 */
+    
+</style>
+
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">房型介紹</h2>
+           @* <ol class="breadcrumb">
+                <li><a href="index.html">首頁</a></li>
+                <li class="active">房型一覽</li>
+                <li class="active">@Html.DisplayFor(model => model.RoomClass.RoomClassName)</li>
+            </ol>*@
+             <ol class="breadcrumb">
+                <li> @Html.ActionLink("首頁", "Index", "Home")</li>
+                <li class="active">@Html.ActionLink("房型一覽", "List", "Room")</li>
+                <li class="active">@Html.DisplayFor(model => model.RoomClass.RoomClassName)</li>
+            </ol>
+        </div>
+    </div>
+</section>
+   <div class="myoverlay" id="myoverlay">
+                <div class="my-modal">
+                    <span class="close" id="close">&times;</span>
+                    <img src="" class="modal-image" alt="Modal Image">
+                </div>
+            </div>
+@*<div class="bread">   
+    @Html.ActionLink("首頁", "Index", "Home")
+    <span>/</span>    
+    @Html.ActionLink("房型一覽", "List", "Room")
+    <span>/</span>
+    @Html.DisplayFor(model => model.RoomClass.RoomClassName)
+</div>*@
+
+<div class="container">
+    <h2 style="padding:20px">房型介紹</h2>
+<hr>
+    <div class="fade-in-from-bottom">
+<div class="row">
+    <div class="col-md-4">
+        <div class="container">
+            <img class="image myenlarge-image" src="~/image/room/@Model.RoomClass.RoomClassPhoto1" width="320" height="240" />          
+               
+            <div id="thumbnail-container">
+                <img class="mythumbnail" src="~/image/room/@Model.RoomClass.RoomClassPhoto1">
+                <img class="mythumbnail" src="~/image/room/@Model.RoomClass.RoomClassPhoto2">
+                <img class="mythumbnail" src="~/image/room/@Model.RoomClass.RoomClassPhoto3">
+            </div>
+
+
+        @*    <div class="myoverlay" id="myoverlay">
+                <div class="my-modal">
+                    <span class="close" id="close">&times;</span>
+                    <img src="" class="modal-image" alt="Modal Image">
+                </div>
+            </div>*@
+        </div>
+
+    </div>
+    <div class="col-md-8">
+        <h2>@Html.DisplayFor(model => model.RoomClass.RoomClassName)</h2>
+                <h4>相關飯店： </h4>
+                <ul>@foreach (var item in Model.HotelIndustry)
+                    {
+                        <li>@item.HotelName</li>
+                    }
+                </ul>
+               
+                <p>@Html.DisplayFor(model => model.RoomClass.RoomClassDetail)</p>
+          
+        <h4>房間設備</h4>
+        <ul class="facility-list">
+            @foreach (var facility in Model.Facility)
+            {
+                <li>
+                    <img src="~/image/facility/@facility.FacilityImage" alt="@facility.FacilityName" />
+                    @facility.FacilityName
+                </li>
+            }
+        </ul>
+            <h5>坪數：@Html.DisplayFor(model => model.RoomClass.RoomClassSize)坪</h5>
+            <h5>入住人數：@Html.DisplayFor(model => model.RoomClass.RoomClassPeople)人</h5>
+        <a href="#"><h5 class="sec_h4">價格:</h5></a>
+        <ul style="list-style-type:none">
+            <li><h5>平日：NT$@Html.DisplayFor(model => model.RoomClass.WeekdayPrice)</h5></li>
+            <li><h5>假日：NT$@Html.DisplayFor(model => model.RoomClass.HolidayPrice)</h5></li>
+        </ul>
+    </div>
+</div>
+    </div>
+@Html.ActionLink("立即預約", "list", "Order", null, new { @class = "book_now_btn button_hover" })
+
+</div>
+@section Scripts{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const images = document.querySelectorAll('.myenlarge-image');
+            const myoverlay = document.getElementById('myoverlay');
+            const modalImage = document.querySelector('.modal-image');
+            const closeButton = document.getElementById('close');
+            const thumbnails = document.querySelectorAll('.mythumbnail');
+
+            images.forEach(function (image) {
+                image.addEventListener('click', function () {
+                    console.log('Image clicked');
+                    myoverlay.style.display = 'flex';
+                    var imagePath = image.getAttribute('src').replace('~', '');
+                    modalImage.src = imagePath;
+                    console.log('Image path:', imagePath);
+
+                });
+            });
+
+            closeButton.addEventListener('click', function () {
+                console.log('Close button clicked');
+                myoverlay.style.display = 'none';
+            });
+
+            myoverlay.addEventListener('click', function (event) {
+                console.log('Overlay clicked');
+                if (event.target === myoverlay) {
+                    myoverlay.style.display = 'none';
+                }
+            });
+
+            thumbnails.forEach((mythumbnail) => {
+                mythumbnail.addEventListener('click', () => {
+                    console.log('Thumbnail clicked');
+                    myoverlay.style.display = 'flex';
+                    var imagePath = mythumbnail.getAttribute('src').replace('~', '');
+                    modalImage.src = imagePath;
+                    console.log('Image path:', imagePath);
+                });
+            });
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const thumbnails = document.querySelectorAll('.mythumbnail');
+            const bigImage = document.querySelector('.myenlarge-image');
+
+            thumbnails.forEach(function (thumbnail) {
+                thumbnail.addEventListener('mouseover', function () {
+                    bigImage.src = thumbnail.src;
+                });
+            });
+        });
+        window.addEventListener('DOMContentLoaded', function() {
+  const thumbnails = document.querySelectorAll('.mythumbnail');
+  
+  thumbnails.forEach(function(thumbnail) {
+    thumbnail.addEventListener('mouseenter', function() {
+      this.style.opacity = '1';
+    });
+    
+    thumbnail.addEventListener('mouseleave', function() {
+      this.style.opacity = '0.5';
+    });
+    thumbnail.style.opacity = '0.5'; // 設置初始透明度為0.5
+  });
+});
+
+        // 在頁面載入完成後，為元素添加show類名以觸發動畫效果
+        document.addEventListener('DOMContentLoaded', function () {
+            var fadeInElements = document.getElementsByClassName('fade-in-from-bottom');
+            for (var i = 0; i < fadeInElements.length; i++) {
+                fadeInElements[i].classList.add('show');
+            }
+        });
+    </script>
+}

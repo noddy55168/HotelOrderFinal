@@ -1,0 +1,74 @@
+﻿<style>
+
+
+</style>
+
+
+<!-- Modal -->
+
+
+<div class="modal fade" id="myAccountModal" tabindex="-1" role="dialog" aria-labelledby="myAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myAccountModalLabel">我的帳戶</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active " id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">會員登入</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link " id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">會員註冊</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link " id="admin-tab" data-bs-toggle="tab" data-bs-target="#admin" type="button" role="tab" aria-controls="admin" aria-selected="false">管理者後台登入</button>
+                </li>
+            </ul>
+            <div class="tab-content d-flex justify-content-center" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">@await Html.PartialAsync("~/Views/Member/Login.cshtml")</div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">@await Html.PartialAsync("~/Views/Member/Create.cshtml")</div>
+                <div class="tab-pane fade" id="admin" role="tabpanel" aria-labelledby="admin-tab">@await Html.PartialAsync("~/Views/Admin/Login.cshtml")</div>
+            </div>
+
+        </div>
+    </div>
+    @*
+    <script>
+    $(document).ready(function () {
+    $('#submit-form').click(function (e) {
+    e.preventDefault();
+
+    $.ajax({
+    type: "POST",
+    url: "/Member/Create",
+    data: $('#my-form').serialize(),
+    success: function () {
+    // 請求成功後的處理程序
+    alert("註冊成功！");
+    },
+    error: function () {
+    // 請求失敗後的處理程序
+    alert("註冊失敗！");
+    }
+    });
+    });
+    });
+    </script>*@
+
+    @*@if (TempData["ErrorMessage"] != null)
+    {
+    <div class="alert alert-danger" role="alert">
+    @TempData["ErrorMessage"]
+    </div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+    <div class="alert alert-success" role="alert">
+    @TempData["SuccessMessage"]
+    </div>
+    }*@

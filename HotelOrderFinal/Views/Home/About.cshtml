@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "_Layout";
+    //Layout = "_Layout";
     ViewData["Title"] = "Privacy Policy";
 }
 
@@ -9,10 +9,10 @@
     <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
     <div class="container">
         <div class="page-cover text-center">
-            <h2 class="page-cover-tittle">About Us</h2>
+            <h2 class="page-cover-tittle">關於我們</h2>
             <ol class="breadcrumb">
-                <li><a href="index.html">Home</a></li>
-                <li class="active">About</li>
+                <li>@Html.ActionLink("首頁", "Index", "Home")</a></li>
+                <li class="active">關於</li>
             </ol>
         </div>
     </div>
@@ -20,24 +20,40 @@
 <!--================Breadcrumb Area =================-->
 <!--================ About History Area  =================-->
 <section class="about_history_area section_gap">
+    <div class="white-block">
     <div class="container">
         <div class="row">
             <div class="col-md-6 d_flex align-items-center">
                 <div class="about_content ">
-                    <h2 class="title title_color">About Us <br>Our History<br>Mission & Vision</h2>
-                    <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed.</p>
-                    <a href="#" class="button_hover theme_btn_two">Request Custom Price</a>
+                    <h2 class="title title_color">關於我們 </h2>
+                        <span class="about-blue-line"></span>
+                    <p>我們的網站是一個聚合了多家飯店業者的平台，為您提供多種選擇的住宿體驗。我們與多家知名飯店業者合作，致力於為客人提供優質的住宿選項。無論您的旅行目的地是哪裡，我們都能為您找到最合適的飯店選擇，以滿足您的需求和偏好。</p>
+                    <h2 class="title title_color">簡史</h2>
+                        <span class="about-blue-line"></span>
+                    <p>
+                        我們的網站成立於2023年，從一開始就與多家飯店業者建立了合作關係。我們以優質的服務和便利的預訂系統，為客人提供簡單、快捷且可靠的預訂體驗。我們深知每個人的旅行需求都不同，因此致力於提供多樣化的飯店選擇，讓客人能夠根據自己的喜好和預算做出最理想的選擇。
+                    </p> <h2 class="title title_color">目標</h2>
+                        <span class="about-blue-line"></span>
+                        <p>
+                        <br />
+                        我們的目標是成為您旅行計劃中的首選平台，為您提供最好的住宿體驗。我們不斷努力擴大合作夥伴網絡，與更多優質的飯店業者合作，以確保您能夠享受到更多種類的住宿選擇。致力於提供方便、安全和可靠的預訂過程，讓您在旅行前就能輕鬆安排好住宿事宜。
+                        <br />
+                        在這網站上，您可以輕鬆瀏覽各種飯店的詳細資訊、房型圖片、設施介紹和客戶評論，以幫助您做出明智的選擇。目標是確保每一位客人都能找到理想的住宿選擇，享受舒適、便利且令人滿意的住宿體驗。
+                        <br />
+                        期待著能夠在您的旅程中，成為您的住宿伴侶，為您提供卓越的服務和難忘的住宿體驗。無論是商務出差、度假旅行還是探訪親友，我們都將竭誠為您服務，確保您的住宿經驗超出期望。
+                    </p>
                 </div>
             </div>
             <div class="col-md-6">
-                <img class="img-fluid" src="image/about_bg.jpg" alt="img">
+                <img class="img-fluid" src="~/image/about_bg.jpg" alt="img">
             </div>
         </div>
+    </div>
     </div>
 </section>
 <!--================ About History Area  =================-->
 <!--================ Facilities Area  =================-->
-<section class="facilities_area section_gap">
+@*<section class="facilities_area section_gap">
     <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background="">
     </div>
     <div class="container">
@@ -88,7 +104,7 @@
 <!--================ Facilities Area  =================-->
 <!--================ Testimonial Area  =================-->
 <section class="testimonial_area section_gap">
-    <div class="container">
+    <div class="container color">
         <div class="section_title text-center">
             <h2 class="title_color">Testimonial from our Clients</h2>
             <p>The French Revolution constituted for the conscience of the dominant aristocratic class a fall from </p>
@@ -152,7 +168,7 @@
             </div>
         </div>
     </div>
-</section>
+</section>*@
 <!--================ Testimonial Area  =================-->
 <!--================ start footer Area  =================-->
 @*<h1>@ViewData["Title"]</h1>

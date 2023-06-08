@@ -1,0 +1,174 @@
+﻿
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">訂房完成</h2>
+        </div>
+    </div>
+</section>
+
+<head>
+    <style>
+        h1 {
+            display: block;
+            text-align: center;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .area {
+            padding: 5px;
+            margin: 10px;
+            /*border: solid green;
+                    border-radius: 20px;*/
+        }
+
+        .area-big {
+            padding: 5px;
+            margin: 10px;
+            border: solid #52c5fd;
+            border-radius: 20px;
+        }
+
+        .row {
+            display: flex;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        h2 {
+            margin: 10px;
+            text-decoration: underline;
+        }
+
+        ol {
+            margin-left: 30px;
+            padding: 5px;
+        }
+
+        .even-row {
+            background-color: #f8f9fa;
+        }
+
+        .lab1 {
+            width: 200px;
+        }
+
+        th {
+            white-space: nowrap;
+        }
+
+        .blue-line {
+            width: 90%;
+            background-color: #b0e5ff;
+        }
+
+    </style>
+
+</head>
+
+<body style="background: #E1F5FE">
+    <div style="margin: 80px;padding: 10px 10px 150px 50px; background-color: white; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);">
+        <div>
+            <h1> 訂單已成立，期待您蒞臨！</h1>
+        </div>
+        <div>
+            <div class="col-md-10 offset-md-1 ">
+                <div class="area-big">
+
+                    <div class="area">
+                        <div>
+                            <h2>房間明細</h2>
+                        </div>
+                        <div style="margin:10px;">
+                            <table id="SessionRoomList" style="box-sizing: border-box ; width:100% ;text-align:center;">
+                                
+                               <tr style="background-color:#f0f0f0">
+                                <th width="20%">住宿時間</th>
+                                <th width="20%">飯店名稱</th>
+                                <th width="20%">房間類型</th>
+                                <th width="20%">住房人數</th>
+                                <th width="20%">小計</th>
+                               </tr>
+                                <tr>
+                                <td><p>入住日期</p><p>2023/07/15</p><p>退房日期</p><p>2023/07/16</p></td>
+                                <td>華泰蔚藍飯店</td>
+                                <td>簡奢雙人房</td>
+                                <td>4</td>
+                                <td>NT$ 8000</td>
+                               
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="blue-line"></div>
+                    <div id="ActivityList">
+                        <div class="area">
+                        <div>
+                        <h2>活動列表</h2>
+                        <div class="row">
+                        <table  style="box-sizing: border-box ; width:100% ;text-align:center;">
+                        <tbody>
+                        <tr style="background-color: #f0f0f0;">
+                        <th width="25%">活動日期</th>
+                        <th width="30%">活動名稱</th>
+                        <th width="25%">參加人數</th>
+                        <th width="20%">小計</th>
+
+                        </tr>
+                        <tr>
+                                                <td>2023/07/15</td>
+                                                <td>盧廣仲15 週年勵志的黃昏的故鄉</td>
+                        <td>4</td>
+                        <td>NT$ 14400</td>
+                        </tr>
+                        </tbody>
+                        </table>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+ 
+                    <div class="blue-line"></div>
+                    <div class="area">
+                        <div>
+                            <h2>付款方式</h2>
+                            <div class="row">
+                                <p style="font-size: 20px; color: red; padding:5px;">現金</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <table style="width:100%">
+                                        <tr>
+                                            <th>折扣後總金額</th>
+                                            <td id="OrderDetailTotalPrice" class="text-center">NT$ 15679</td>
+
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-2">
+                        <a href="#">@Html.ActionLink("訂房首頁", "List", "Order", null, new { @class = "btn btn-primary btn-block" })</a>
+                    
+                    </div>
+                     <div class="col-md-2">
+                       
+                        <a href="#">@Html.ActionLink("付款", "List", "Order", null, new { @class = "btn btn-primary btn-block" })</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>

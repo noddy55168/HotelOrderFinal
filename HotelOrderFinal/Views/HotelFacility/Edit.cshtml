@@ -1,0 +1,60 @@
+﻿@model HotelOrderFinal.Models.HotelFacility
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">About Us</h2>
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">About</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+
+<div class="row">
+    <div class="col-md-3" style="background-color: #f2f2f2;"></div>
+    <div class="col-md-6" style="background-color: #f2f2f2;">
+<h1>Edit</h1>
+
+<h4>HotelFacility</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="HotelFacilityId" class="control-label"></label>
+                <input asp-for="HotelFacilityId" class="form-control" />
+                <span asp-validation-for="HotelFacilityId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HotelFacilityName" class="control-label"></label>
+                <input asp-for="HotelFacilityName" class="form-control" />
+                <span asp-validation-for="HotelFacilityName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">飯店設施照片</label>
+                <input type="file" name="photo" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+    </div>
+
+    <div class="col-md-3" style="background-color: #f2f2f2;">
+    </div>
+</div>

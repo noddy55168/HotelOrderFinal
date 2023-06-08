@@ -1,0 +1,243 @@
+﻿
+
+<!doctype html>
+<html lang="en">
+<head>
+    @*Required meta tags*@
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="~/image/caticon.png" type="image/png">
+    <title>Hotel Order</title>
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <link rel="stylesheet" href="~/vendors/linericon/style.css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="~/vendors/nice-select/css/nice-select.css">
+    <link rel="stylesheet" href="~/vendors/owl-carousel/owl.carousel.min.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <link rel="stylesheet" href="~/css/ForHotelIndustry.css">
+    <link rel="stylesheet" href="~/css/ForAdmin.css">
+    <link rel="stylesheet" href="~/css/ForLayout.css">
+    
+    
+    <style>
+        /*管理者模式的nav改色*/
+        /*nav調色*/
+        .navbar {
+            background: #ff616185;
+        }
+
+        .navbar_fixed {
+            background: #C76768;
+        }
+
+        /*更改滑鼠移至nav link上的顏色*/
+        .navbar .menu_nav .nav-item:hover .nav-link, .navbar .menu_nav .nav-item.active .nav-link {
+            color: #FFB3B3;
+        }
+
+    </style>
+
+    @*Bootstrap CSS*@
+    @*    @Styles.Render("~/Content/css/bootstrap.css")
+    @Styles.Render("~/Content/css/font-awesome.min.css")
+    @Styles.Render("~/Content/css/style.css")
+    @Styles.Render("~/Content/css/responsive.css")
+    @Styles.Render("~/Scripts/vendors/owl-carousel/owl.carousel.min.css")
+    @Styles.Render("~/Scripts/vendors/nice-select/css/nice-select.css")
+    @Styles.Render("~/Scripts/vendors/linericon/style.css")
+
+    @Scripts.Render("~/Scripts/js/jquery-3.2.1.min.js")
+    @Scripts.Render("~/Scripts/js/popper.js")
+    @Scripts.Render("~/Scripts/js/bootstrap.min.js")
+    @Scripts.Render("~/Scripts/js/jquery.ajaxchimp.min.js")
+    @Scripts.Render("~/Scripts/js/mail-script.js")
+    @Scripts.Render("~/Scripts/js/stellar.js")
+    @Scripts.Render("~/Scripts/js/custom.js")
+    @Scripts.Render("~/Scripts/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.js")
+    @Scripts.Render("~/Scripts/vendors/nice-select/js/jquery.nice-select.js")
+    @Scripts.Render("~/Scripts/vendors/lightbox/simpleLightbox.min.js")
+    @Scripts.Render("~/Scripts/vendors/owl-carousel/owl.carousel.min.js")*@
+
+
+
+
+</head>
+<body>
+    <!-- ================Header Area =================-->
+    <header class="header_area">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <!--Brand and toggle get grouped for better mobile display-->
+                <a class="navbar-brand logo_h" asp-controller="Home" asp-action="Index">
+                    <img src="~/image/logo transparentsmall.png" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--Collect the nav links, forms, and other content for toggling-->
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item active; nav-item">@Html.ActionLink("關於", "About", "Home", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item active; nav-item">@Html.ActionLink("飯店一覽", "List", "HotelIndustry", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item active; nav-item">@Html.ActionLink("房型", "List", "Room", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item active; nav-item">@Html.ActionLink("活動", "List", "Activity", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item active; nav-item">@Html.ActionLink("評論", "ListByAdmin", "Comment", null, new { @class = "nav-link" })</li>
+                        @{
+                            var AdminId = Context.Session.GetString ( "AdminId" );
+                        }
+                        <li class="nav-item active; nav-item">@Html.ActionLink(@"歡迎，"+AdminId, "List", "Admin", null, new { @class = "nav-link" })</li>
+                        @*<li class="nav-item active; nav-item">@Html.ActionLink("優惠折扣", "DiscountByMember", "Discount", null, new { @class = "nav-link" })</li>*@
+                        <li class="nav-item active; nav-item">@Html.ActionLink("登出", "Logout", "Member", null, new { @class = "nav-link" })</li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    @RenderBody()
+    <!--================ Recent Area  =================
+        ================ start footer Area  =================-->
+    <div id="mytop-button">TOP</div>
+    <div style="text-align:center">
+    </div>
+    <footer class="footer-area section_gap">
+
+
+        <div class="container">
+            <div class="row text-center">
+
+                <div class="col-lg-3 col-md-6 col-sm-6">
+
+                    <div class="single-footer-widget">
+                        <h6 class="footer_title">SuXi</h6>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-4">
+                                <ul class="list_style">
+                                    <li><a href="#">關於我們</a></li>
+                                    <li><a href="#">宿禧品牌</a></li>
+                                    <li><a href="#">宿禧中心</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-4">
+                                <ul class="list_style">
+                                    <li><a href="#">宿禧公寓</a></li>
+                                    <li><a href="#">宿禧人才</a></li>
+                                    <li><a href="#">聯絡我們</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6 class="footer_title">預定和查詢</h6>
+                        <div class="row justify-content-center">
+                            <div>
+                                <ul class="list_style">
+                                    <li><a href="#">我們的目的地</a></li>
+                                    <li><a href="#">查找或預訂</a></li>
+                                    <li><a href="#">會議與宴會</a></li>
+                                    <li><a href="#">促銷優惠</a></li>
+                                    <li><a href="#">設施和服務</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6 class="footer_title">其他資訊</h6>
+                        <div class="row justify-content-center">
+                            <div>
+                                <ul class="list_style">
+                                    <li><a href="#">會員中心</a></li>
+                                    <li><a href="#">常見問題</a></li>
+                                    <li><a href="#">活動指南</a></li>
+                                    <li><a href="#">線上客服</a></li>
+                                    <li><a href="#">訂閱電子報</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-3 col-sm-12 footer-social">
+                    <a href="#" class="social-link"><i class="fab fa-facebook custom-icon"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter custom-icon"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-line custom-icon"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram custom-icon"></i></a>
+
+                </div>
+
+            </div>
+            <div class="border_line"></div>
+            <div class="row footer-bottom d-flex justify-content-between align-items-center">
+                <p class="col-lg-12 col-sm-12 footer-text m-0 text-center">
+
+                    <strong><span>iSpan Hotel </span></strong>&copy; 2023 . All Rights Reserved
+                    Designed by <a href="https://getbootstrap.com/">Bootstrap</a>
+                </p>
+
+            </div>
+        </div>
+        <div class="copyright">
+        </div>
+    </footer>
+    <!--================ End footer Area  =================
+    Optional JavaScript
+    jQuery first, then Popper.js, then Bootstrap JS-->
+
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script src="~/js/popper.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/js/mail-script.js"></script>
+    <script src="~/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/vendors/nice-select/js/jquery.nice-select.js"></script>
+    <script src="~/js/mail-script.js"></script>
+    <script src="~/js/stellar.js"></script>
+    <script src="~/vendors/lightbox/simpleLightbox.min.js"></script>
+    <script src="~/js/custom.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/datetimepicker.js"></script>
+    @*顯示footer的social icon*@
+    <script src='https://kit.fontawesome.com/d02c97dcba.js' crossorigin='anonymous'></script>
+    @*@await RenderSectionAsync("Scripts",required:false)*@
+
+    @RenderSection("Scripts", required: false)
+
+    <script>
+        // 當文件載入完成時
+        $(document).ready(function () {
+            // 綁定滾動事件
+            $(window).scroll(function () {
+                // 檢查滾動位置
+                if ($(this).scrollTop() > 100) {
+                    // 滾動位置超過 100px 時，顯示回頁首按鈕
+                    $('#mytop-button').fadeIn();
+                } else {
+                    // 滾動位置小於 100px 時，隱藏回頁首按鈕
+                    $('#mytop-button').fadeOut();
+                }
+            });
+
+            // 點擊回頁首按鈕時，捲動到頁面頂部
+            $('#mytop-button').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 'slow');
+            });
+        });
+
+    </script>
+</body>
+</html>

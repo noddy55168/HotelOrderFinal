@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewData["Title"] = "MyAccount";
+}
+
+<h1>MyAccount</h1>
+
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">About Us</h2>
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">About</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
+
+@*
+<div class="modal fade" id="myAccountModal" tabindex="-1" role="dialog" aria-labelledby="myAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myAccountModalLabel">我的帳戶</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="myAccountTabs">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#registerTab">會員註冊</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#loginTab">會員登入</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="registerTab">
+                            Loading...
+                        </div>
+                        <div class="tab-pane fade" id="loginTab">
+                            Loading...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+@*<div class="modal fade" id="myAccountModal" tabindex="-1" role="dialog" aria-labelledby="myAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myAccountModalLabel">我的帳戶</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="myAccountTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="loginTab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">會員登入</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="registerTab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">會員註冊</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myAccountTabContent">
+                    <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="loginTab">
+                        @Html.Partial("~/Views/Member/Login.cshtml")
+
+                    </div>
+                    <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="registerTab">
+                        @Html.Partial("~/Views/Member/Create.cshtml")
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+*@
+
+
+
+
+
+
+
+<script>
+    $(function () {
+        $('#myAccountButton').click(function () {
+            var url = '@Url.Action("Index", "Member")';
+            $.get(url, function (data) {
+                $('#registerTab').html(data);
+                $('#loginTab').load('@Url.Action("Login", "Account")');
+                $('#myAccountModal').modal('show');
+            });
+        });
+    });
+</script>
+
+
+
+

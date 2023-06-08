@@ -1,0 +1,114 @@
+﻿@model IEnumerable<HotelOrderFinal.Models.Comment>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">評論一覽</h2>
+        </div>
+    </div>
+</section>
+<head>
+    <title>評點&評價</title>
+    <style>
+        div {
+        }
+
+        .card-text {
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            padding: inherit;
+            overflow: hidden;
+        }
+
+        .card-img {
+            display: block;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row" style="background-color: #dcebfd;">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                <div class="page-cover text-left">
+                    <p>
+                        @using (Html.BeginForm())
+                        {
+                            @:關鍵字 @Html.TextBox("txtKeyword")  <input type="submit"  class="btn btn-light" value="查詢">
+
+                            @using (Html.BeginForm("List", "Comment", new { id = "my-form-id" }))
+                            {
+                                <button type="button"  class="btn btn-secondary" onclick="demoSearch()">Demo</button>
+                            }
+                            @ViewBag.Message
+                        }
+                    </p>
+                    <p>
+                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#myAccountModal" data-backdrop="false">請寫下您寶貴的意見</a>
+                        @{
+                            int count = 0; decimal avgPoint = 0, totPoint = 0;
+                            foreach (var item2 in Model)
+                            {
+                                count++;
+                                totPoint += item2.CommentPoint.Value;
+                            }
+                            if (count > 0) {
+                                avgPoint = (totPoint / count);
+                            }
+                            <span style="color:#2894FF; font-size:1.5em;">　　　評點平均數:@avgPoint.ToString("N2")</span>
+                        }
+                    </p>
+                    <div class="d-flex flex-wrap" style="padding-bottom:10px">
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <div class="col-5 col-1-sm-6">
+                                    <div class="card" style="width:400px; height:200px;  border-radius:10px;  margin-top:10px; padding-bottom:10px;">
+
+                                        <div class="card-body">
+                                            <input type="hidden" value="@Html.DisplayFor(modelItem => item.CommentId)" />
+                                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.CommentDate)</h5>
+                                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.MemberId)</h5>
+                                            <h6 class="card-subtitle mb-2 text-body-secondary">
+                                                @for (var i = 0; i < item.CommentPoint; i++)
+                                                {
+                                                    <img src="../image/comment/shining.png">
+                                                }
+                                                @Html.DisplayFor(modelItem => item.CommentPoint)
+                                                @if (item.CommentClass == 1)
+                                                {
+                                                    <label style="color:#2894FF">　整體</label>
+                                                }
+                                                @if (item.CommentClass == 2)
+                                                {
+                                                    <label style="color:#2894FF">　房間</label>
+                                                }
+                                                @if (item.CommentClass == 3)
+                                                {
+                                                    <label style="color:#2894FF">　服務</label>
+                                                }
+                                            </h6>
+                                            <p class="card-text; lnr-highlight:16rem;">@Html.DisplayFor(modelItem => item.CommentDetail)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+@section Scripts
+{
+    <script src="~/js/comment/demoSearch.js"></script>
+}

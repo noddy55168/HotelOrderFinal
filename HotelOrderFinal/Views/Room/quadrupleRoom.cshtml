@@ -1,0 +1,158 @@
+﻿@model IEnumerable<HotelOrderFinal.Models.RoomClass>
+@{
+    ViewData["Title"] = "quadrupleRoom";
+}
+
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">房型一覽</h2>
+            <ol class="breadcrumb">
+                <li><a href="index.html">首頁</a></li>
+                <li class="active">房型</li>
+            </ol>
+        </div>
+
+    </div>>
+    <div class="hotel_booking_area position">
+        <div class="container">
+            <div class="hotel_booking_table">
+                <div class="col-md-12">
+                    <div class="boking_table" style="width:100%">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="book_tabel_item">
+                                    <select class="wide">
+                                        <option data-display="入住地區">選擇地區</option>
+                                        <option value="1">北區</option>
+                                        <option value="2">中區</option>
+                                        <option value="3">南區</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="book_tabel_item">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <input type="date" id="checkInDate" name="checkInDate" class="form-control" placeholder="入住日" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="book_tabel_item">
+                                    <div class="form-group">
+                                        <input type="date" id="checkOutDate" name="checkOutDate" class="form-control" placeholder="退房日" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="book_tabel_item">
+                                    @* <a href="#">@Html.ActionLink("立即預約", "Index", "Order", null, new { @class = "book_now_btn button_hover" })</a>*@
+                                    <a href="#" onclick="return setSession();" class="book_now_btn button_hover">立即預約</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
+<!--================ Accomodation Area  =================-->
+<section class="accomodation_area section_gap">
+    <div class="container">
+        <div class="section_title text-center">
+            <h2 class="title_color">品味·風格·選擇</h2>
+            <p>豪華住宿，無與倫比的舒適</p>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a data-toggle="tab" href="#allRooms">
+                        @Html.ActionLink("所有房型","List", "Room",null,new { @class = "nav-link active" })
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a data-toggle="tab" href="#doubleRoom">
+                        @Html.ActionLink("雙人房","doubleRoom", "Room",null,new { @class = "nav-link active" })
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a data-toggle="tab" href="#quadrupleRoom">
+                        @Html.ActionLink("四人房","quadrupleRoom", "Room",null,new { @class = "nav-link active" })
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a data-toggle="tab" href="#familyRoom">
+                        @Html.ActionLink("親子房","familyRoom", "Room",null,new { @class = "nav-link active" })
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a data-toggle="tab" href="presidentialSuite">
+                        @Html.ActionLink("總統房","presidentialSuite", "Room",null,new { @class = "nav-link active" })
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="doubleRoom" class="tab-pane fade show active">
+                    <div class="row accomodation_two">
+
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="accomodation_item text-center">
+                                        <div class="hotel_img">
+                                            @* <img src="~/image/room1.jpg" alt="">*@
+                                            @*<img src="~/image/room/@item.RoomClassPhoto1" width="320" height="240" />*@
+                                            <a href="@Url.Action("Detail", "Room", new { id = item.RoomClassId })">
+                                                <img src="~/image/room/@item.RoomClassPhoto1" width="320" height="240" />
+                                            </a>
+                                            @*<a href="#" class="btn theme_btn button_hover">Book Now</a>*@
+                                            @*@Html.ActionLink("Book Now", "Detail", "Room",new {  id=item.RoomClassId}, new { @class = "btn theme_btn button_hover" })*@
+                                        </div>
+                                        <a href="@Url.Action("Detail", "Room", new { id = item.RoomClassId })">
+                                            <h4 class="sec_h4">@Html.DisplayFor(modelItem => item.RoomClassName)</h4>
+                                        </a>
+                                        @* <a href="#"><h4 class="sec_h4">@Html.DisplayFor(modelItem => item.RoomClassName)</h4></a>*@
+                                        <h5>@Html.DisplayFor(modelItem => item.HolidayPrice)<small>/night</small></h5>
+                                    </div>
+                                    @*@Html.ActionLink("Edit", "Edit", "Room",new {  id=item.RoomClassId})*@
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ Accomodation Area  =================-->
+<script>
+    function setSession() {
+        var checkInDate = document.getElementById("checkInDate").value;
+        var checkOutDate = document.getElementById("checkOutDate").value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/Home/setSession", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // alert("session的CHECKINDATE值：" + HttpContext.Session.GetString("CHECKINDATE") + "\n session的CHECKOUTDATE值：" + HttpContext.Session.GetString("CHECKOUTDATE"));
+            }
+            window.location.href = "/Order/List";
+
+        };
+
+        xhr.send("checkInDate=" + encodeURIComponent(checkInDate) + "&checkOutDate=" + encodeURIComponent(checkOutDate));
+
+        //防止表單自動提交
+        return false;
+    }
+</script>

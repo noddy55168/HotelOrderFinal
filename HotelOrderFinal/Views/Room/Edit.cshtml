@@ -1,0 +1,143 @@
+﻿@model HotelOrderFinal.Models.RoomClass
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<style>
+/*    .form-control {
+    width:60%;
+    }
+*/
+</style>
+
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+            <div class="page-cover text-center">
+                <h2 class="page-cover-tittle">後台管理系統：房型管理</h2>           
+        </div>
+    </div>
+</section>
+
+
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h1>編輯房型</h1>
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RoomClassId" class="control-label">房型編號</label>
+                <input asp-for="RoomClassId" class="form-control" readonly />
+                <span asp-validation-for="RoomClassId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomClassName" class="control-label">房型名稱</label>
+                <input asp-for="RoomClassName" class="form-control" />
+                <span asp-validation-for="RoomClassName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomClassDetail" class="control-label">詳細介紹</label>
+                <textarea asp-for="RoomClassDetail" class="form-control" cols="40" rows="5"></textarea>
+                <span asp-validation-for="RoomClassDetail" class="text-danger"></span>
+            </div>
+                    <div class="form-group">
+                        <label asp-for="WeekdayPrice" class="control-label">平日價格</label>
+                        <input asp-for="WeekdayPrice" class="form-control" />
+                        <span asp-validation-for="WeekdayPrice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="HolidayPrice" class="control-label">假日價格</label>
+                        <input asp-for="HolidayPrice" class="form-control" />
+                        <span asp-validation-for="HolidayPrice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="AddPrice" class="control-label">加人數價格</label>
+                        <input asp-for="AddPrice" class="form-control" />
+                        <span asp-validation-for="AddPrice" class="text-danger"></span>
+                    </div>
+            </div>
+                <div class="col-md-6">
+@*            <div class="form-group">
+                <label class="control-label">房間照片1</label>
+                <input type="file" name="photo1" class="form-control" />
+                        <img class="mythumbnail" src="~/image/room/@Model.RoomClassPhoto1" width="120" height="90">
+                <input asp-for="RoomClassPhoto1" class="form-control" readonly />
+                <span asp-validation-for="RoomClassPhoto1" class="text-danger"></span>
+            </div>*@
+                    <div class="form-group">
+                        <label class="control-label">房間照片1</label>
+                        <input type="file" name="photo1" id="photo1Input" class="form-control" />
+                        <img id="photo1Preview" class="mythumbnail" src="~/image/room/@Model.RoomClassPhoto1" width="120" height="90">
+                        <span asp-validation-for="RoomClassPhoto1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">房間照片2</label>
+                        <input type="file" name="photo2" id="photo2Input" class="form-control" />
+                        <img id="photo2Preview" class="mythumbnail" src="~/image/room/@Model.RoomClassPhoto2" width="120" height="90">
+                        <span asp-validation-for="RoomClassPhoto2" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">房間照片3</label>
+                        <input type="file" name="photo3" id="photo3Input" class="form-control" />
+                        <img id="photo3Preview" class="mythumbnail" src="~/image/room/@Model.RoomClassPhoto3" width="120" height="90">
+                        <span asp-validation-for="RoomClassPhoto3" class="text-danger"></span>
+                    </div>
+
+@*            <div class="form-group">
+                <label class="control-label">房間照片2</label>
+                <input type="file" name="photo2" class="form-control" />
+                        <img class="mythumbnail" src="~/image/room/@Model.RoomClassPhoto2" width="120" height="90">
+                <input asp-for="RoomClassPhoto2" class="form-control" readonly />
+                <span asp-validation-for="RoomClassPhoto2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">房間照片3</label>
+                <input type="file" name="photo3" class="form-control" />
+                        <img class="mythumbnail" src="~/image/room/@Model.RoomClassPhoto3" width="120" height="90">
+                <input asp-for="RoomClassPhoto3" class="form-control" readonly />
+                <span asp-validation-for="RoomClassPhoto3" class="text-danger"></span>
+            </div>*@
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-action="AdminRoom" class="btn btn-secondary">回到列表</a>
+</div>
+
+<script>
+        // 監聽上傳檔案的變動
+        document.getElementById("photo1Input").addEventListener("change", function (event) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById("photo1Preview").src = e.target.result; // 更新圖片預覽的 src
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
+    // 監聽上傳檔案的變動
+    document.getElementById("photo2Input").addEventListener("change", function (event) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById("photo2Preview").src = e.target.result; // 更新圖片預覽的 src
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    });
+    // 監聽上傳檔案的變動
+    document.getElementById("photo3Input").addEventListener("change", function (event) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById("photo3Preview").src = e.target.result; // 更新圖片預覽的 src
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    });
+</script>

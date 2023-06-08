@@ -1,0 +1,174 @@
+﻿@*@model IEnumerable<HotelOrderFinal.Models.DiscountDetail>*@
+    @model List< HotelOrderFinal.ViewModels.CDiscountViewModel>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        @*  <div class="page-cover text-center">
+        <h2 class="page-cover-tittle">About Us</h2>
+        <ol class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li class="active">About</li>
+        </ol>
+        </div>*@
+    </div>
+</section>
+<style>
+    .wrapper {
+        width: 80%; /* 設定容器寬度 */
+        margin: 0 auto; /* 將容器置中對齊 */
+    }
+
+    table th {
+        white-space: nowrap;
+    }
+</style>
+<div class="wrapper ">
+
+    <h1>會員優惠折扣</h1>
+    <hr />
+    <div class="row">
+        @*//【側邊欄位】==========================================================================*@
+        <div class="col-xs-12 col-md-3">
+            <div class="athMember__menu pb-sm-3">
+                <div class="athMember__user pb-20">
+                    <div class="athMember__userInfo">
+                        @{
+                            var userName = Context.Session.GetString("UserName");
+                            var userId = Context.Session.GetString("UserID");
+                            var usePhone = Context.Session.GetString("UserPhone");
+                        }
+                        <h2 class="athMember__userName">@userName</h2>
+                        @*<p class="athMember__usePhone">@usePhone</p>*@
+                    </div>
+                </div>
+                <div class="athMemberNav">
+                    <ul class="athMember__menuList d-mdx-none pb-15 mt-10" style="list-style: none;">
+                        <li class="athMember__menu__isactive">
+                            @Html.ActionLink("修改資料", "Edit", "Member", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li class="athMember__menu__isactive">
+                            @Html.ActionLink("修改密碼", "EditPassword", "Member", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li class="athMember__menu__isactive">
+                            @Html.ActionLink("您的訂單", "ShoppingCar", "Member", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li class="athMember__menu__isactive">
+                            @Html.ActionLink("優惠折扣", "DiscountByMember", "Discount", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li class="athMember__menu__isactive">
+                            @Html.ActionLink("您的評論", "ListByMember", "Comment", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        @*<li class="athMember__menu__isactive" hidden>*@
+                        @*@Html.ActionLink("最新消息", "News", "Member", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })*@
+                        @*</li>*@
+                        <li class="athMember__menu__isactive">
+                            @Html.ActionLink("會員條款", "terms", "Member", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        @*<li class="athMember__menu__isactive" hidden>*@
+                        @*@Html.ActionLink("電子會員卡", "MemberCard", "Member", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })*@
+                        @*</li>*@
+
+                    </ul>
+                    <div class="d-md-none">
+                        <p class="athMember__menu__select mt-20 mb-10">會員資料選單</p>
+                        <div class="athMember__menuList form-group athSelect w-100">
+                            <select class="form-control">
+                                <option value="memberEdit">修改資料</option>
+                                <option value="passwordEdit">修改密碼</option>
+                                <option value="getOrderQueryMn">您的訂單</option>
+                                <option value="getNews">最新消息</option>
+                                <option value="memberRule">會員條款</option>
+                                <option value="memberBenefit">會員福利</option> <!----> <!---->
+                                <option value="memberCard">電子會員卡</option> <!----> <!---->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*///-----------------------------------------------------------------------------------------*@
+
+        <div class="col-xs-12 col-md-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            編號
+                        </th>
+                        @*<th>
+                        @Html.DisplayNameFor(model => model.DiscountId)
+                        </th>*@
+                        <th>
+                            優惠名稱
+                        </th>
+                        <th>
+                            優惠開始時間
+                            @*@Html.DisplayNameFor(model => model.DiscountStart)*@
+                        </th>
+                        <th>
+                            優惠結束時間
+                            @*@Html.DisplayNameFor(model => model.DiscountEnd)*@
+                        </th>
+                        <th>
+                            優惠是否使用
+                            @*@Html.DisplayNameFor(model => model.DiscountUse)*@
+                        </th>
+                        @*@<th>
+                        @Html.DisplayNameFor(model => model.MemberId)
+                        </th>*@
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int count = 0;
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td>
+                                    @count
+                                </td>
+                                <td style="white-space: nowrap;">
+                                    @item.names
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.discountDetail.DiscountStart)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.discountDetail.DiscountEnd)
+                                </td>
+                                <td>
+                                    @*@Html.DisplayFor(modelItem => item.DiscountUse)*@
+                                    @{
+                                        string s1 = "";
+                                        if (item.discountDetail.DiscountUse == 0)
+                                        { s1 = "可使用"; }
+                                        else if (item.discountDetail.DiscountUse == 1)
+                                        { s1 = "已使用"; }
+                                    }
+                                    @Html.Raw(s1)
+                                </td>
+                                @*<td>
+                        @Html.DisplayFor(modelItem => item.MemberId)
+                        </td>*@
+
+                                @*<td>
+                        @Html.ActionLink("修改", "Edit", new {  id=item.DiscountId  }) |
+                        @Html.ActionLink("刪除", "Delete","Discount", new {  id=item.DiscountId },new {onclick="return confirm('確定刪除嗎?')"})
+                        </td>*@
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

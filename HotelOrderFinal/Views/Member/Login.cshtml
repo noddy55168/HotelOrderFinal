@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+<style>
+
+    /*    .checkbox input[type="checkbox"],
+        .checkbox a {
+            display: inline-block;
+            vertical-align: middle;
+        }*/
+
+
+</style>
+<div class="wrapper ">
+    <p></p>
+    @using (Html.BeginForm("Login", "Member", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label for="MemberPhone">手機號碼</label>
+            <input type="tel" id="MemberPhone" name="MemberPhone" class="form-control" required placeholder="09XXXXXXXX">
+        </div>
+
+
+
+
+            <label for="MemberPassword">密碼</label>        
+@*            <label>
+                <input type="checkbox" name="showPassword" id="chkShowPassword">顯示密碼
+            </label>*@
+            <input type="password" id="MemberPassword" name="MemberPassword" class="form-control" required placeholder="8位字元以上，需包含中英文大小寫">
+            <div class="input-group-append">
+                <label class="input-group-text">
+                    <input type="checkbox" id="chkShowPassword">顯示密碼
+                </label>
+            </div>
+        
+
+        
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">登入</button>
+            <a href="@Url.Action("ForgotPassword", "Member")" class="btn btn-primary">忘記密碼</a><br><br>
+            <button type="button" class="btn btn-primary" onclick="demoLogin1() ">Demo</button>
+            <button type="button" class="btn btn-primary" onclick="demoLogin2() ">Demo(會員)</button>
+            <button type="button" class="btn btn-primary" onclick="demoLogin3() ">Demo(活動)</button>
+        </div>
+    }
+    @{
+        var errorMessage = TempData["MemberErrorMessage"] as string;
+    }
+
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <script>
+            alert("帳號密碼錯誤，請重新確認，謝謝!");
+        </script>
+    }
+
+    <script>
+        function demoLogin1() {
+            // 設定手機號碼和密碼欄位的值
+            document.getElementById("MemberPhone").value = "0936582783";
+            document.getElementById("MemberPassword").value = "64V7VpFc";
+        }
+                function demoLogin2() {
+            // 設定手機號碼和密碼欄位的值
+            document.getElementById("MemberPhone").value = "0978999999";
+            document.getElementById("MemberPassword").value = "AAaa1122";
+        }
+        function demoLogin3() {
+            // 設定手機號碼和密碼欄位的值
+            document.getElementById("MemberPhone").value = "0968000595";
+            document.getElementById("MemberPassword").value = "U33dBsLF";
+        }
+    </script>
+<script>
+
+        const passwordInput = document.getElementById('MemberPassword');
+        const showPasswordCheckbox = document.getElementById('chkShowPassword');
+
+        showPasswordCheckbox.addEventListener('change', function () {
+            if (showPasswordCheckbox.checked) {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        });
+
+</script>
+
+</div>

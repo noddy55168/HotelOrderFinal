@@ -1,0 +1,48 @@
+﻿
+table {
+    font-family: 微軟正黑體,arial,sans-serif;
+    font-size: 15px;
+    color: #333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+    width: auto;
+    border: 1px solid #e9ecef;
+}
+
+    table th {
+        border-width: 1px;
+        padding: 8px;
+        font-size: 16px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #dedede;
+        border: 1px solid #e9ecef;
+        white-space: nowrap;
+    }
+
+    table td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #ffffff;
+        border: 1px solid #e9ecef;
+        white-space: nowrap;
+    }
+.table thead th {
+    vertical-align: middle;
+    text-align:center;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.table th, .table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    text-align: center;
+    border-top: 1px solid #e9ecef;
+}
+table td.member-id {
+    background-color: #f2f2f2; /* 設定灰色背景顏色 */
+    /* 其他樣式屬性 */
+}

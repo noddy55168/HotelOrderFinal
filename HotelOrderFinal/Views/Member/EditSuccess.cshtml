@@ -1,0 +1,21 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+    @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+    {
+        <div id="successMessage">@ViewBag.SuccessMessage</div>
+        <script>
+            // 顯示成功訊息
+            alert("修改成功");
+            window.location.href = '@Url.Action("Edit", "Member")';
+        </script>
+    }
+</body>
+</html>

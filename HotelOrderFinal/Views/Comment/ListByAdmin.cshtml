@@ -1,0 +1,181 @@
+﻿@model IEnumerable<HotelOrderFinal.Models.Comment>
+
+@{
+    ViewData["Title"] = "ListByAdmin";
+}
+<link rel="stylesheet" href="~/css/ForAdminTable.css">
+<style>
+
+    .table td {
+        white-space: nowrap; /* 防止内容换行 */
+        overflow: hidden; /* 隐藏溢出内容 */
+        text-overflow: ellipsis; /* 使用省略号表示溢出内容 */
+        overflow: hidden; /* 隐藏溢出内容 */
+        white-space: normal;
+    }
+</style>
+
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">後台管理系統：評論管理</h2>
+        </div>
+    </div>
+</section>
+
+<div class="Adminwrapper">
+    <div class="row">
+        <div class="col-xs-12 col-md-2">
+            <div class=" ">
+                <div class=" ">
+                    <div class="">
+                        @{
+                            var AdminId = Context.Session.GetString("AdminId");
+                        }
+
+                    </div>
+                </div>
+                <div class="">
+                    <h2 style="text-align: center">
+                        @Html.ActionLink(AdminId, "List", "Admin")
+                    </h2>
+                    <ul class="list" style="list-style: none; padding: 0;">
+
+                        <!--改成手風琴下拉式-->
+                        <li>
+                            @Html.ActionLink("會員管理", "List", "MemberMange", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("房型管理", "AdminRoom", "Room", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("活動管理", "ActivityByCreate", "Activity", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("訂房管理", "EditPassword", "Member", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("飯店一覽管理", "ListView", "HotelIndustry", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("優惠折扣管理", "List", "Discount", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("評論管理", "ListByAdmin", "Comment", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="selectedItemContent" class="col-xs-12 col-md-10 ">
+            <!-- 這裡會顯示點選的項目的內容 -->
+            <p></p>
+            <p>
+                @using (Html.BeginForm())
+                {
+                    @:關鍵字 @Html.TextBox("txtKeyword") <input type="submit" class="btn btn-light" value="查詢">
+                    @using (Html.BeginForm("ListByAdmin", "Comment", new { id = "my-form-id" }))
+                    {
+                        <button type="button" class="btn btn-secondary" onclick="demoSearch()">Demo</button>
+                    }
+                    @ViewBag.Message
+                }
+            </p>
+            <p style="padding-left:10px">
+                <a asp-action="CreateByAdmin" class="btn btn-info">新增評論</a>
+                @{
+                    int count2 = 0; decimal avgPoint = 0, totPoint = 0;
+                    foreach (var item2 in Model)
+                    {
+                        count2++;
+                        totPoint += item2.CommentPoint.Value;
+                    }
+                    if (count2 > 0)
+                    {
+                        avgPoint = (totPoint / count2);
+                    }
+                    <span style="color:#2894FF; font-size:1.5em;">　　　評點平均數:@avgPoint.ToString("N2")</span>
+                }
+            </p>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            序
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.CommentDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MemberId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CommentClass)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CommentPoint)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CommentDetail)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int count = 0;
+                        foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td>
+                                    @count
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CommentDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MemberId)
+                                </td>
+                                <td>
+                                    @if (item.CommentClass == 1)
+                                    {
+                                        <label>　整體</label>
+                                    }
+                                    @if (item.CommentClass == 2)
+                                    {
+                                        <label>　房間</label>
+                                    }
+                                    @if (item.CommentClass == 3)
+                                    {
+                                        <label>　服務</label>
+                                    }
+                                </td>
+                                <td>
+                                    @for (var i = 0; i < item.CommentPoint; i++)
+                                    {
+                                        <img src="../image/comment/shining.png">
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CommentDetail)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("修改", "EditByAdmin", new {id=item.CommentId},new { @class="btn btn-success" })
+                                    @Html.ActionLink("刪除", "DeleteByAdmin", new {id=item.CommentId},new { @class="btn btn-danger", onclick="return confirm('確定要刪除嗎?')"})
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts
+    {
+    <script src="~/js/comment/demoSearch.js"></script>
+}

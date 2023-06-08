@@ -1,0 +1,65 @@
+﻿@model IEnumerable<HotelOrderFinal.Models.RoomClass>
+
+@{
+    ViewData["Title"] = "SearchRooms";
+}
+
+<h1>SearchRooms</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomClassId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomClassName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomClassDetail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WeekdayPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HolidayPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomClassId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomClassName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomClassDetail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeekdayPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HolidayPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddPrice)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,131 @@
+﻿@model IEnumerable<HotelOrderFinal.Models.Discount>
+
+@{
+    ViewData["Title"] = "List";
+}
+<link rel="stylesheet" href="~/css/ForAdminTable.css">
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">後台管理系統：優惠管理</h2>
+        </div>
+    </div>
+</section>
+@*<h1>優惠管理</h1>*@
+<div class="Adminwrapper">
+    <div class="row">
+        <div class="col-xs-12 col-md-2">
+            <div class=" ">
+                <div class=" ">
+                    <div class="">
+                        @{
+                            var AdminId = Context.Session.GetString("AdminId");
+                        }
+
+                    </div>
+                </div>
+                <div class="">
+                    <h2 style="text-align: center">
+                        @Html.ActionLink(AdminId, "List", "Admin")
+                    </h2>
+                    <ul class="list" style="list-style: none; padding: 0;">
+
+                        <!--改成手風琴下拉式-->
+                        <li>
+                            @Html.ActionLink("會員管理", "List", "MemberMange", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("房型管理", "AdminRoom", "Room", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("活動管理", "ActivityByCreate", "Activity", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("訂房管理", "EditPassword", "Member", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("飯店一覽管理", "ListView", "HotelIndustry", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("優惠折扣管理", "List", "Discount", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("評論管理", "ListByAdmin", "Comment", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="selectedItemContent" class="col-xs-12 col-md-10 ">
+            <!-- 這裡會顯示點選的項目的內容 -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                編號
+                @*@Html.DisplayNameFor(model => model.DiscountId)*@
+            </th>
+            <th>
+                優惠名稱
+                @*@Html.DisplayNameFor(model => model.DiscountName)*@
+            </th>
+            <th>
+                優惠照片
+                @*@Html.DisplayNameFor(model => model.DiscountImage)*@
+            </th>
+            <th>
+                優惠詳細
+                @*@Html.DisplayNameFor(model => model.DiscountDirections)*@
+            </th>
+            
+            <th>
+                優惠折數
+                @*@Html.DisplayNameFor(model => model.DiscountDiscount)*@
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.MemberId)
+            </th>*@
+            <th>
+                <a asp-action="Create" class="btn btn-info">新增優惠</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+@foreach (var item in Model) {            
+            count++;
+            <tr>
+            <td>
+                @count
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountName)
+            </td>
+            <td>
+                 <img src="~/image/@item.DiscountImage" width="160" height="120" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountDirections)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountDiscount)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.MemberId)
+            </td>*@
+
+                <td>
+                    @Html.ActionLink("修改", "Edit", new {id=item.DiscountId},new { @class="btn btn-success" }) 
+                    @Html.ActionLink("刪除", "Delete","Discount", new {  id=item.DiscountId },new { @class="btn btn-danger", onclick="return confirm('確定要刪除嗎?')"})
+                </td>
+        </tr>
+}
+        }
+    </tbody>
+</table>
+</div>
+</div>
+</div>

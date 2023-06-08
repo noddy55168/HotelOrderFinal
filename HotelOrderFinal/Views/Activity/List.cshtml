@@ -6,86 +6,95 @@
 <section class="breadcrumb_area">
     <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
     <div class="container">
-        <div class="page-cover text-center">
-            <h2 class="page-cover-tittle">About Us</h2>
-            <ol class="breadcrumb">
-                <li><a href="index.html">Home</a></li>
-                <li class="active">About</li>
-            </ol>
-        </div>
+        @*<div class="page-cover text-center">
+        <h2 class="page-cover-tittle">About Us</h2>
+        <ol class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li class="active">About</li>
+        </ol>
+        </div>*@
     </div>
 </section>
-<h1>活動一覽表</h1>
 
-<p>
-    <a asp-action="Create">前往訂房</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                序
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActivityName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActivityImage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActivityDirections)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActivityTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActivityPlace)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActivityPeople)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActivityCost)
-            </th>
-            
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            int count = 0; 
-            foreach (var item in Model) {
-                count++;
-                    <tr>
-                <td>
-                        @count
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ActivityName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ActivityImage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ActivityDirections)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ActivityTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ActivityPlace)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ActivityPeople)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ActivityCost)
-                </td>
-                <td>
-                        @Html.ActionLink("修改", "Edit", new {  id=item.ActivityId  }) |
-                        @Html.ActionLink("刪除", "Delete","Customer", new {  id=item.ActivityId },new {onclick="return confirm('確定刪除嗎?')"})
-                </td>
-            </tr>
-}}
-    </tbody>
-</table>
+<head>
+
+    <style>
+        div {
+        }
+
+        .card-text {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            overflow: hidden;
+        }
+
+        .card-img {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row" style="background-color: #dcebfd;">
+            @* -------------------------------------------------------
+            <div class="col-md-2" style="background-color: #f2f2f2;">
+            <h2>左欄內容</h2>
+            <p>
+            <a asp-action="Create">前往訂房</a>
+            </p>
+            </div>
+            --------------------------------------------------------*@
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="page-cover text-center">
+                    <h2 class="page-cover text-center">分區活動遊覽</h2>
+
+                    <div class="d-flex flex-wrap">
+                        @{
+                            foreach (var item in Model)
+                            {
+
+                                <div class="col-4 col-2-sm-5">
+                                    <div>
+                                        <input type="hidden" value="@Html.DisplayFor(modelItem => item.ActivityId)" />
+                                    </div>
+                                    <div class="card" style="height:540px; margin-bottom: 20px;">
+                                        <img class="card-img" src="~/image/@item.ActivityImage" width="320" height="240" />
+                                        <br>
+
+                                        <div class="card-body">
+                                            <p>@Html.DisplayFor(modelItem => item.ActivityTime)</p>
+                                            <h5 class="card-title"> @Html.DisplayFor(modelItem => item.ActivityName)</h5>
+                                            <div class="card-text">@Html.DisplayFor(modelItem => item.ActivityDirections)</div>
+                                            @*<a href="#" class="btn btn-primary">前往詳細內容</a>*@
+                                            <a href="@Url.Action("ActivityByDetails", "Activity", new { id = item.ActivityId })" class="btn btn-primary">前往詳細內容</a>
+                                        </div>
+                                    </div>
+
+
+                           @* <td>
+                            @Html.ActionLink("修改", "Edit", new {  id=item.ActivityId  }) |
+                            @Html.ActionLink("刪除", "Delete","Customer", new {  id=item.ActivityId },new {onclick="return confirm('確定刪除嗎?')"})
+                            </td> *@
+
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+
+
+

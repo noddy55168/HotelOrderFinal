@@ -1,0 +1,210 @@
+﻿@model HotelOrderFinal.Models.Activity
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        @*<div class="page-cover text-center">
+        <h2 class="page-cover-tittle">About Us</h2>
+        <ol class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li class="active">About</li>
+        </ol>
+        </div>*@
+    </div>
+</section>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*    <title>評點&評論</title>*@
+    <link rel="stylesheet" href="../css/start.css" />
+    <style>
+        .card-text {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            overflow: hidden;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* .類別名 可套用在不同標籤上*/
+        .left {
+            width: 400px;
+            float: left;
+            margin-left: 100px;
+        }
+
+        .t1 {
+            /* float: left; 文繞圖浮動到左邊*/
+            float: left;
+        }
+
+        .t2 {
+            width: 400px;
+            text-align: center;
+        }
+
+        .sub {
+            width: 400px;
+            /* 捲軸:視需要自動啟動 */
+            overflow: auto;
+            margin-left: 10px;
+            text-align: start;
+        }
+        /* 不能任意調整文字框大小 */
+        textarea {
+            margin-left: 10px;
+            resize: none;
+        }
+    </style>
+</head>
+
+
+<body>
+@*<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ActivityId" class="control-label"></label>
+                <input asp-for="ActivityId" class="form-control" />
+                <span asp-validation-for="ActivityId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActivityName" class="control-label"></label>
+                <input asp-for="ActivityName" class="form-control" />
+                <span asp-validation-for="ActivityName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActivityImage" class="control-label"></label>
+                <input asp-for="ActivityImage" class="form-control" />
+                <span asp-validation-for="ActivityImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActivityDirections" class="control-label"></label>
+                <input asp-for="ActivityDirections" class="form-control" />
+                <span asp-validation-for="ActivityDirections" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActivityTime" class="control-label"></label>
+                <input asp-for="ActivityTime" class="form-control" />
+                <span asp-validation-for="ActivityTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActivityPlace" class="control-label"></label>
+                <input asp-for="ActivityPlace" class="form-control" />
+                <span asp-validation-for="ActivityPlace" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActivityPeople" class="control-label"></label>
+                <input asp-for="ActivityPeople" class="form-control" />
+                <span asp-validation-for="ActivityPeople" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActivityCost" class="control-label"></label>
+                <input asp-for="ActivityCost" class="form-control" />
+                <span asp-validation-for="ActivityCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>*@
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                    <div class="d-flex flex-wrap">
+                        @*    <div class="col-md-4">*@
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                @*<label asp-for="ActivityId" class="control-label"></label>*@
+                            <input type="hidden" asp-for="ActivityId" class="form-control" />
+                                <span asp-validation-for="ActivityId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ActivityName" class="control-label">活動名稱</label>
+                                <input asp-for="ActivityName" class="form-control" />
+                                <span asp-validation-for="ActivityName" class="text-danger"></span>
+                            </div>
+                           @* <div class="form-group">
+                                <label asp-for="ActivityImage" class="control-label"></label>
+                                <input asp-for="ActivityImage" class="form-control" />
+                                <span asp-validation-for="ActivityImage" class="text-danger"></span>
+                            </div>*@
+                            <div class="form-group">
+                                <label asp-for="ActivityDirections" class="control-label">活動詳細</label>
+                                <input asp-for="ActivityDirections" class="form-control" />
+                                <span asp-validation-for="ActivityDirections" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ActivityTime" class="control-label">活動時間</label>
+                                <input asp-for="ActivityTime" class="form-control" />
+                                <span asp-validation-for="ActivityTime" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ActivityPlace" class="control-label">活動地點</label>
+                                <input asp-for="ActivityPlace" class="form-control" />
+                                <span asp-validation-for="ActivityPlace" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ActivityPeople" class="control-label">人數限制</label>
+                                <input asp-for="ActivityPeople" class="form-control" />
+                                <span asp-validation-for="ActivityPeople" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ActivityCost" class="control-label">活動費用</label>
+                                <input asp-for="ActivityCost" class="form-control" />
+                                <span asp-validation-for="ActivityCost" class="text-danger"></span>
+                            </div>
+                            @*<div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>*@
+
+                            <div class="form-group">
+                            <input type="submit" value="新增活動" class="btn btn-primary" />
+                                <input type="reset" value="清除" class="btn btn-secondary" />
+                            <a asp-action="ActivityByCreate" class="btn btn-warning">取消</a>
+                            </div>
+                            <div class="form-group">
+                                @using (Html.BeginForm("Create", "Activity", new { id = "my-form-id" }))
+                                {
+                                    <button type="button" class="btn btn-dark" onclick="demoActivityCareate()">Demo</button>
+                                }
+                                @ViewBag.Message
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script> 
+        function demoActivityCareate() {
+            // 設定 Demo 評價
+            // 取得表單元素和欄位元素
+        
+        document.getElementById("ActivityName").value = "臺港劇場共製《千年幻戀》真雲林閣掌中劇團 X 浪人劇場（香港）";
+        document.getElementById("ActivityDirections").value = "東方的愛情故事，從來也不是激烈動盪，反而是如水般無疾而終，所謂苦戀是東方的「招牌菜」。〈聶小倩〉是苦戀的經典名篇，是男與女，人與鬼，道士（神）與妖（魔）的不斷交纏。我們選中的是當中的「愛」，可以是情慾間的愛，人神間的愛，正邪間的愛，說到底就是「執念」。";
+        document.getElementById("ActivityTime").value = "2023-07-29 14:30"; 
+        document.getElementById("ActivityPlace").value = "臺北市士林區文林路751號";
+        document.getElementById("ActivityPeople").value = 30;
+        document.getElementById("ActivityCost").value = 500;
+        form.submit();
+        }   
+</script>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

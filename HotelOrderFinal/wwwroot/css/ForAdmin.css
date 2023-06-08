@@ -1,0 +1,28 @@
+﻿.Adminwrapper {
+    width: 90%; /* 設定容器寬度 */
+    margin: 0 auto; /* 將容器置中對齊 */
+}
+.Adminbutton {
+    color: #E0E0E0;
+    background-color: #272727;
+    border: 1px solid transparent;
+    border-color: black black black;
+    margin: 5px;
+    font-size: larger;
+    white-space: nowrap;
+}
+
+/*要用子選擇器或後代選擇器*/
+.list > li > a:hover {
+    color: #272727;
+    background-color: #F0F0F0;
+    border: 1px solid #272727;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+.Admincanvas {
+    margin: 0 auto;
+}
+.hidden {
+    display: none;
+}

@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* .類別名 可套用在不同標籤上*/
+.left {
+    width: 28%;
+    float: left;
+    margin-left: 10px;
+}
+
+.t1 {
+    /* float: left; 文繞圖浮動到左邊*/
+    float: left;
+}
+
+.t2 {
+    width: 400px;
+    text-align: center;
+}
+
+.sub {
+    width: 400px;
+    /* 捲軸:視需要自動啟動 */
+    overflow: auto;
+    margin-left: 10px;
+    text-align: start;
+}
+/* 不能任意調整文字框大小 */
+textarea {
+    margin-left: 10px;
+    resize: none;
+}

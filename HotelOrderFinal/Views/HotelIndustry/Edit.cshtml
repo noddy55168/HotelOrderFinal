@@ -1,0 +1,81 @@
+﻿@model HotelOrderFinal.Models.HotelIndustry
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">About Us</h2>
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">About</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h1>飯店業者修改</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" value="@Model.HotelId" name="HotelId" />
+            <div class="form-group">
+                <label asp-for="HotelName" class="control-label">飯店名稱</label>
+                <input asp-for="HotelName" class="form-control" />
+                <span asp-validation-for="HotelName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                        <label asp-for="HotelPhone" class="control-label">飯店電話號碼</label>
+                <input asp-for="HotelPhone" class="form-control" />
+                <span asp-validation-for="HotelPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HotelRegionId" class="control-label">地區</label>
+                <input asp-for="HotelRegionId" class="form-control" />
+                <span asp-validation-for="HotelRegionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HotelAddress" class="control-label">地址</label>
+                <input asp-for="HotelAddress" class="form-control" />
+                <span asp-validation-for="HotelAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HotelImageDiscription" class="control-label">圖片描述</label>
+                <input asp-for="HotelImageDiscription" class="form-control" />
+                <span asp-validation-for="HotelImageDiscription" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">飯店照片</label>
+                <input type="file" name="photo" class="form-control" />
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="送出" class="btn btn-primary" style="margin-right:10px; margin-bottom:10px;" />
+                <button class="btn btn-secondary" style="margin-right:10px; margin-bottom:10px;" asp-action="ListView">回到飯店一覽</button>
+                <br />
+                <button class="btn btn-danger" style="margin-right:10px; margin-bottom:10px;">@Html.ActionLink("刪除", "Delete", "HotelIndustry", new {id=Model.HotelId}, new { @style="color:white" ,onclick = "return confirm('確定刪除?')"})</button>
+                <br />
+                <button class="btn btn-secondary" asp-action="Index" asp-controller="Home">回到首頁</button>
+            </div>
+        </form>
+    </div>
+</div>
+    </div>
+</div>
+<div>
+  @*  <a asp-action="Index">Back to List</a>*@
+</div>
+
+@*@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}*@

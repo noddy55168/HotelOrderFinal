@@ -3,69 +3,85 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">About Us</h2>
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">About</li>
+            </ol>
+        </div>
+    </div>
+</section>
 
+<div style="margin:50px">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
 <h1>修改活動資訊</h1>
 
-<h4>修改活動內容</h4>
+
 <hr />
-<div class="row">
-    <div class="col-md-4">
+    
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ActivityId" class="control-label"></label>
-                <input asp-for="ActivityId" class="form-control" />
+                <div class="form-group" type="hidden">
+                @*<label asp-for="ActivityId" class="control-label"></label>*@
+                <input type="hidden" asp-for="ActivityId" class="form-control" />
                 <span asp-validation-for="ActivityId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ActivityName" class="control-label"></label>
+                <label asp-for="ActivityName" class="control-label">活動名稱</label>
                 <input asp-for="ActivityName" class="form-control" />
                 <span asp-validation-for="ActivityName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ActivityImage" class="control-label"></label>
+                <label asp-for="ActivityImage" class="control-label">活動圖片</label>
                 <input asp-for="ActivityImage" class="form-control" />
                 <span asp-validation-for="ActivityImage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ActivityDirections" class="control-label"></label>
+                <label asp-for="ActivityDirections" class="control-label">活動詳細</label>
                 <input asp-for="ActivityDirections" class="form-control" />
                 <span asp-validation-for="ActivityDirections" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ActivityTime" class="control-label"></label>
+                <label asp-for="ActivityTime" class="control-label">活動時間</label>
                 <input asp-for="ActivityTime" class="form-control" />
                 <span asp-validation-for="ActivityTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ActivityPlace" class="control-label"></label>
+                <label asp-for="ActivityPlace" class="control-label">活動地點</label>
                 <input asp-for="ActivityPlace" class="form-control" />
                 <span asp-validation-for="ActivityPlace" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ActivityPeople" class="control-label"></label>
+                <label asp-for="ActivityPeople" class="control-label">人數限制</label>
                 <input asp-for="ActivityPeople" class="form-control" />
                 <span asp-validation-for="ActivityPeople" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ActivityCost" class="control-label"></label>
+                <label asp-for="ActivityCost" class="control-label">活動費用</label>
                 <input asp-for="ActivityCost" class="form-control" />
                 <span asp-validation-for="ActivityCost" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label   class="control-label">產品照片</label>
+                <label   class="control-label">活動照片</label>
                 <input type="file" name="photo" class="form-control" />                
             </div>
             <div class="form-group">
-                <input type="submit" value="送出" class="btn btn-primary" />
+                    <div class="form-group">
+                        <input type="submit" value="送出" class="btn btn-primary" />
+                        <button type="button" onclick="location.href='@Url.Action("List")'" class="btn btn-secondary">取消</button>
+                    </div>
+               
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="List">取消</a>
 </div>
+
 
 @*@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

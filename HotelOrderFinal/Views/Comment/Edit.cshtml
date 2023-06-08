@@ -1,0 +1,97 @@
+﻿@model HotelOrderFinal.Models.Comment
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">會員管理系統:你的評論</h2>
+        </div>
+    </div>
+</section>
+<head>
+    <title>評點&評論</title>
+    <style>
+        .card-text {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            overflow: hidden;
+        }
+        /* .類別名 可套用在不同標籤上*/
+        .left {
+            width: 400px;
+            float: left;
+            margin-left: 50px;
+        }
+        /* 不能任意調整文字框大小 */
+        textarea {
+            margin-left: 10px;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+            <div class="row" style="background-color: #dcebfd;">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                <p></p>
+                <h4>修改評論</h4>
+                <hr />
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <input type="hidden" asp-for="CommentId" />
+                                <span asp-validation-for="CommentId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CommentDate" class="control-label"></label>
+                                <input asp-for="CommentDate" class="form-control" readonly />
+                                <span asp-validation-for="CommentDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" asp-for="CommentClass" />
+                                <span asp-validation-for="CommentClass" class="text-danger"></span>
+                            </div>
+
+                            <br>
+
+                            <div class="form-group">
+                                <input type="hidden" asp-for="CommentPoint" />
+                                <span asp-validation-for="CommentPoint" class="text-danger"></span>
+                            </div>
+
+                            <div class="sub">
+                                <label asp-for="CommentDetail" class="control-label"></label>
+                                <textarea asp-for="CommentDetail" cols="40" rows="5"></textarea>
+                                <span asp-validation-for="CommentDetail" class="text-danger"></span>
+                            </div>
+
+@*                            <div class="form-group">
+                                <label asp-for="CommentDetail" class="control-label"></label>
+                                <input asp-for="CommentDetail" class="form-control" />
+                                <span asp-validation-for="CommentDetail" class="text-danger"></span>
+                            </div>*@
+                            <div class="form-group">
+                                <input type="submit" value="儲存" class="btn btn-primary" />
+                                <a asp-action="ListByMember" class="btn btn-warning">取消</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+@section Scripts {
+@*    <script src="~/js/comment/commentpoint.js"></script>*@
+
+                }

@@ -1,0 +1,130 @@
+﻿@model HotelOrderFinal.Models.Activity
+@{
+    ViewData["Title"] = "ActivityByDetails";
+}
+
+<head>
+
+    <style>
+        .toast-container {
+            z-index: 10000; /* 确保Toast显示在最上层 */
+        }
+
+        .toast {
+            width: 300px;
+            background-color: #f8f9fa;
+        }
+
+        .toast-success {
+            border-color: #28a745;
+        }
+
+        .toast-error {
+            border-color: #dc3545;
+        }
+    </style>
+</head>
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        @*<div class="page-cover text-center">
+        <h2 class="page-cover-tittle">About Us</h2>
+        <ol class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li class="active">About</li>
+        </ol>
+        </div>*@
+    </div>
+</section>
+
+
+<h1 class="text-center">活動詳細資訊</h1>
+<br />
+
+
+<div class="d-flex justify-content-center align-items-center" style="background-color:#dcebfd">
+
+    <div class="page-cover text-center">
+        <div class="d-flex flex-wrap">
+            <div id="toast-container" class="toast-container position-fixed top-0 end-0 p-3"></div>
+            <div class="text-black about_content" style="width: 50rem;">
+                <img class="card-img" src="~/image/@Model.ActivityImage" width="300" height="400" />
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => Model.ActivityName)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => Model.ActivityDirections)</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">地址：@Html.DisplayFor(modelItem => Model.ActivityPlace)</li>
+                    <li class="list-group-item">時間：@Html.DisplayFor(modelItem => Model.ActivityTime)</li>
+                    <li class="list-group-item">費用：@Html.DisplayFor(modelItem => Model.ActivityCost)</li>
+                    <li class="list-group-item">限制人數：@Html.DisplayFor(modelItem => Model.ActivityPeople)</li>
+                </ul>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">參加活動確認單</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                注意事項
+                                <p>請確認活動地址：</p>
+                                <p>活動地點是否與您住宿地區相近，若區域不同將不額外補償</p>
+                                <p>請確認活動時間：</p>
+                                <p>活動時間是否與您住宿日期相符合，若不相同將不負責損失</p>
+                                <p>請確認活動費用及人數：</p>
+                                <p>請確認您參加的人數，並且確認是否有超過人數上限</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#" onclick="getSearchActivityValue();" class="book_now_btn button_hover">參加並訂房</a>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <button type="button" onclick="setSessionByActivity(@Model.ActivityId)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">參加活動</button>
+                    @*@<button type="button" onclick="location.href='@Url.Action("ActivityByAcceding", "Activity")'" class="btn btn-primary" nclick="setSessionByActivity(@Model.ActivityId)">參加活動</button>*@
+                    <button type="button" onclick="window.history.back();" class="btn btn-secondary">回上一層</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    async function setSessionByActivity(ActivityId) {
+        const activityid = ActivityId
+        console.log('活動ID', activityid);
+        const response = await fetch(`/Activity/setSessionByActivity?ActivityID=${activityid}`, {
+
+            method: 'POST'
+        });
+    }
+    function getSearchActivityValue() {
+        fetch('/Activity/getSessionToOrder', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(response => response.json())
+            .then(data => {
+              
+                checkInDate = data.checkInDate
+                checkOutDate = data.checkOutDate
+
+                console.log('checkInDate:', data.checkInDate);
+                console.log('checkOutDate:', data.checkOutDate);
+
+                var url = `/Order/List?checkInDate=${encodeURIComponent(checkInDate)}&checkOutDate=${encodeURIComponent(checkOutDate)}`;
+
+                window.location.href = url;
+            });
+    }
+
+
+
+
+</script>

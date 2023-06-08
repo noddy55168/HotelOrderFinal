@@ -1,16 +1,30 @@
-﻿@{
+﻿@model HotelOrderFinal.ViewModels.CindexActivityViewModels
+@{
     ViewData["Title"] = "Home Page";
 }
 <!--================Banner Area =================-->
+<style>
+    .fade-in {
+        opacity: 0; /* 設置初始透明度為 0 */
+        transform: translateY(50px); /* 將元素下移 50px */
+        transition: opacity 2s ease, transform 2s ease; /* 添加過渡效果 */
+    }
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        .fade-in.show {
+            opacity: 1; /* 漸入完成後，將透明度設置為 1 */
+            transform: translateY(0); /* 元素上移恢復原位 */
+        }
+</style>
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">*@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+
 @*底下分別是Bootstrap CSS/fontawesome.com用的ICON 需要有才可以使用在飯店設施上的ICON!*@
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script src='https://kit.fontawesome.com/d02c97dcba.js' crossorigin='anonymous'></script>
 
 <section class="banner_area">
     <div class="booking_table d_flex align-items-center">
@@ -31,65 +45,43 @@
     <div class="hotel_booking_area position">
         <div class="container">
             <div class="hotel_booking_table">
-                <div class="col-md-3">
-                    <h2>預約<br> 您的房間</h2>
-                </div>
-                <div class="col-md-9">
-                    <div class="boking_table">
+                <div class="col-md-12">
+                    <div class="boking_table" style="width:100%">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="book_tabel_item">
+                                    <select id="hotelId" class="wide">
+                                        <option data-display="入住飯店">選擇飯店</option>
+                                        @foreach (var item in Model.hotelIndustry)
+                                        {
+                                            <option  value="@item.HotelId">@item.HotelName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="book_tabel_item">
                                     <div class="form-group">
-                                        <div class='input-group date' id='datetimepicker11'>
-                                            <input type='text' class="form-control" placeholder="入住日" />
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-calendar" aria-hidden="true"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class='input-group date' id='datetimepicker1'>
-                                            <input type='text' class="form-control" placeholder="退房日" />
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-calendar" aria-hidden="true"></i>
-                                            </span>
+                                        <div class="form-group">
+                                            <input type="date" id="checkInDate" name="checkInDate" class="form-control" placeholder="入住日" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+
+                            <div class="col-md-3">
                                 <div class="book_tabel_item">
-                                    <div class="input-group">
-                                        <select class="wide">
-                                            <option data-display="成人">成人</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group">
-                                        <select class="wide">
-                                            <option data-display="兒童">兒童</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                        </select>
+                                    <div class="form-group">
+                                        <input type="date" id="checkOutDate" name="checkOutDate" class="form-control" placeholder="退房日" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+
+                            <div class="col-md-3">
                                 <div class="book_tabel_item">
-                                    <div class="input-group">
-                                        <select class="wide">
-                                            <option data-display="入住房型">房型</option>
-                                            <option value="1">單人房</option>
-                                            <option value="2">雙人房</option>
-                                            <option value="3">四人房</option>
-                                        </select>
-                                    </div>
-                                    <a class="book_now_btn button_hover" href="#">立即預約</a>
+                                    @* <a href="#">@Html.ActionLink("立即預約", "Index", "Order", null, new { @class = "book_now_btn button_hover" })</a>*@
+                                    <a href="#" onclick="getSearchRoomValue();" class="book_now_btn button_hover">立即預約</a>
+
                                 </div>
                             </div>
                         </div>
@@ -102,84 +94,82 @@
 <!--================Banner Area =================-->
 <!--================ Accomodation Area  =================-->
 <section class="accomodation_area section_gap">
+    <div class="white-block fade-in">
     <div class="container">
         <div class="section_title text-center">
-            <h2 class="title_color">房型介紹</h2>
-            <p>我們的超棒房間 </p>
+            <h2 class="title_color">風格介紹</h2>
+            <p>依照風格,展現不同的風貌</p>
+                <span class="blue-line"></span>
         </div>
-        <div class="row mb_30">
+        <div class="row mb_30 fade-in">
             <div class="col-lg-3 col-sm-6">
                 <div class="accomodation_item text-center">
                     <div class="hotel_img">
-@*
+                        @*
                         <a class="navbar-brand logo_h" asp-controller="Home" asp-action="Index">
-                            <img src="~/image/Logo2.png" alt="">
+                        <img src="~/image/Logo2.png" alt="">
                         </a>*@
-                        <a href="#">
-                            <img src="image/room1.jpg" alt="">
-                            </a>
-                       
+                        <a href="@Url.Action("List", "Room")">
+                            <img src="image/room/ae2c9ea0-75aa-450b-9f42-40a99a55e1b5.jpg" alt="" width="262" height="270">
+                        </a>
+
                     </div>
-                    <a href="#"><h4 class="sec_h4">日式風格 Japan</h4></a>
-                    <h5>NT250<small>/night</small></h5>
+                    <a href="@Url.Action("List", "Room")"><h4 class="sec_h4">簡奢風格</h4></a>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="accomodation_item text-center">
                     <div class="hotel_img">
 
-                        <a href="#">
-                            <img src="image/room2.jpg" alt="">
+                        <a href="@Url.Action("List", "Room")">
+                            <img src="image/room/4eb3dca9-03e7-43f9-aebe-00df912c34a0.jpg" alt="" width="262" height="270">
                         </a>
                         @*<img src="image/room2.jpg" alt="">
                         <a href="#" class="btn theme_btn button_hover">Book Now</a>*@
                     </div>
-                    <a href="#"><h4 class="sec_h4">北歐風格 Nordic</h4></a>
-                    <h5>NT200<small>/night</small></h5>
+                    <a href="@Url.Action("List", "Room")"><h4 class="sec_h4">日式風格</h4></a>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="accomodation_item text-center">
                     <div class="hotel_img">
 
-                        <a href="#">
-                            <img src="image/room3.jpg" alt="">
+                        <a href="@Url.Action("List", "Room")">
+                            <img src="image/room/da7329be-29db-47e3-b437-d9194635f104.jpg" alt="" width="262" height="270">
                         </a>
                         @*<img src="image/room3.jpg" alt="">
                         <a href="#" class="btn theme_btn button_hover">Book Now</a>*@
                     </div>
-                    <a href="#"><h4 class="sec_h4">波希米亞 Bohemian</h4></a>
-                    <h5>NT750<small>/night</small></h5>
+                    <a href="@Url.Action("List", "Room")"><h4 class="sec_h4">北歐風格</h4></a>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="accomodation_item text-center">
                     <div class="hotel_img">
 
-                        <a href="#">
-                            <img src="image/room4.jpg" alt="">
+                        <a href="@Url.Action("List", "Room")">
+                            <img src="image/room/11f06d41-cf38-4047-bd8e-eb5a332ee516.jpg" alt="" width="262" height="270">
                         </a>
                         @*<img src="image/room4.jpg" alt="">
                         <a href="#" class="btn theme_btn button_hover">Book Now</a>*@
                     </div>
-                    <a href="#"><h4 class="sec_h4">地中海 Mediterranean</h4></a>
-                    <h5>NT200<small>/night</small></h5>
+                    <a href="@Url.Action("List", "Room")"><h4 class="sec_h4">總統套房</h4></a>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 </section>
 <!--================ Accomodation Area  =================-->
-
 <!--================ About History Area  =================-->
-<section class="about_history_area section_gap">
+@*<section class="about_history_area section_gap">
     <div class="container">
         <div class="row">
             <div class="col-md-6 d_flex align-items-center">
                 <div class="about_content ">
-                    <h2 class="title title_color">關於我們 <br>飯店簡史<br>目標</h2>
-                    <p>介紹欄位代填</p>
-                    <a href="#" class="button_hover theme_btn_two">Request Custom Price</a>
+                    <h2 class="title title_color">關於我們 </h2>
+                    <p>我們飯店是一家位於城市中心的高級酒店，提供全方位的住宿體驗。我們的團隊致力於以最優質的服務和設施，為每一位客人打造一個難忘的入住體驗。無論是商務旅客、家庭遊客還是情侶度假者，我們都以熱情、專業和細緻的待客之道，讓每位客人感受到家的溫暖和舒適。</p>
+                    <a href="#" class="button_hover theme_btn_two">取得價格</a>
                 </div>
             </div>
             <div class="col-md-6">
@@ -187,52 +177,53 @@
             </div>
         </div>
     </div>
-</section>
+</section>*@
 <!--================ About History Area  =================-->
 <!--================ Facilities Area  =================-->
 <section class="facilities_area section_gap">
     <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background="">
     </div>
     <div class="container">
-        <div class="section_title text-center">
+        <div class="section_title text-center fade-in">
             <h2 class="title_w">飯店設施</h2>
-            <p>Who are in extremely love with eco friendly system.</p>
+            <p style="color: #e9ecef;">我們提供一系列精心設計的設施，以滿足您的各種需求和喜好</p>
+            <span class="blue-line"></span>
         </div>
-        <div class="row mb_30">
+        <div class="row mb_30 fade-in">
             <div class="col-lg-4 col-md-6">
                 <div class="facilities_item">
-                    <h4 class="sec_h4"><i class="lnr lnr-dinner"></i>餐廳</h4>
-                    <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                    <h4 class="sec_h4"><i class="fas fa-coffee"></i>咖啡廳</h4>
+                    <p>舒適的咖啡廳，供旅客享受美味的咖啡和甜點，放鬆身心的絕佳場所。</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="facilities_item">
-                    <h4 class="sec_h4"><i class="lnr lnr-bicycle"></i>戶外體驗</h4>
-                    <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                    <h4 class="sec_h4"><i class="fas fa-hot-tub"></i>溫泉浴場</h4>
+                    <p>天然溫泉浸泡和水療服務，盡情放鬆身心，舒緩疲勞。</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="facilities_item">
-                    <h4 class="sec_h4"><i class="fas fa-swimmer"></i>游泳池</h4>
-                    <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                    <h4 class="sec_h4"><i class="fas fa-swimming-pool"></i>游泳池</h4>
+                    <p>室內游泳池，提供清涼和娛樂，讓您在旅途中享受暢遊的樂趣！</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="facilities_item">
-                    <h4 class="sec_h4"><i class="lnr lnr-car"></i>租車服務</h4>
-                    <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                    <h4 class="sec_h4"><i class="fas fa-utensils"></i>自助餐廳</h4>
+                    <p>自助餐廳提供多樣化的美食選擇，根據自己的口味和喜好享受豐盛的用餐體驗。</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="facilities_item">
-                    <h4 class="sec_h4"><i class="bi bi-wifi"></i>WIFI吃到飽</h4>
-                    <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                    <h4 class="sec_h4"><i class="fas fa-users"></i>會議室</h4>
+                    <p>現代化的會議室設施，適合舉辦各類商務會議、研討會和培訓活動，使您的會議順利進行！</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="facilities_item">
-                    <h4 class="sec_h4"><i class="lnr lnr-coffee-cup"></i>咖啡廳</h4>
-                    <p>Usage of the Internet is becoming more common due to rapid advancement of technology and power.</p>
+                    <h4 class="sec_h4"><i class="fas fa-plane"></i>旅遊服務</h4>
+                    <p>專業的旅遊服務，為旅客提供全面的旅遊諮詢和行程安排，讓旅行更加便捷和愉快！</p>
                 </div>
             </div>
         </div>
@@ -240,79 +231,81 @@
 </section>
 <!--================ Facilities Area  =================-->
 <!--================ Testimonial Area  =================-->
-<section class="testimonial_area section_gap">
-    <div class="container">
+<section class="latest_blog_area section_gap comment-background">
+    <div class="comment-white-block">
+
+        <div class="container fade-in">
         <div class="section_title text-center">
-            <h2 class="title_color">房型評論區</h2>
-            <p>The French Revolution constituted for the conscience of the dominant aristocratic class a fall from </p>
+                <h2 class="title_color">來自客人優良評價</h2>
+                <p>給未來客人信心與參考</p>
+            <span class="blue-line"></span>
         </div>
-        <div class="testimonial_slider owl-carousel">
-            <div class="media testimonial_item">
-                <img class="rounded-circle" src="image/testtimonial-1.jpg" alt="">
-                <div class="media-body">
-                    <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you think about it, you travel across her face, and She is the </p>
-                    <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
+
+        <div class="testimonial_slider owl-carousel fade-in">
+            <div class="media testimonial_item" style="border-radius:10px">
+                <div class="media-body sec_h4">
+                    <p>提前訂到228連假，2500元的價位，CP值很高，至少不是老舊飯店，安全上比較安心 </p>
+                    <a href="#"><h4>MB00005</h4></a>
                     <div class="star">
                         <a href="#"><i class="fa fa-star"></i></a>
                         <a href="#"><i class="fa fa-star"></i></a>
                         <a href="#"><i class="fa fa-star"></i></a>
                         <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star-half-o"></i></a>
+                        <a href="#"><i class="fa fa-star"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="media testimonial_item">
-                <img class="rounded-circle" src="image/testtimonial-1.jpg" alt="">
-                <div class="media-body">
-                    <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you think about it, you travel across her face, and She is the </p>
-                    <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
+            <div class="media testimonial_item" style="border-radius:10px">
+                <div class="media-body sec_h4">
+                    <p>平日4100（含早餐）覺得很頂，飯店有健身房整體整理得很舒服～很喜歡(*˘︶˘*).。.:*♡ </p>
+                    <a href="#"><h4>MB00003</h4></a>
                     <div class="star">
                         <a href="#"><i class="fa fa-star"></i></a>
                         <a href="#"><i class="fa fa-star"></i></a>
                         <a href="#"><i class="fa fa-star"></i></a>
                         <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star-half-o"></i></a>
+                        <a href="#"><i class="fa fa-star"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="media testimonial_item">
-                <img class="rounded-circle" src="image/testtimonial-1.jpg" alt="">
-                <div class="media-body">
-                    <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you think about it, you travel across her face, and She is the </p>
-                    <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
+            <div class="media testimonial_item" style="border-radius:10px">
+                <div class="media-body sec_h4">
+                    <p>房間很乾淨 空間也很好 床算是偏硬的床 很棒很好睡 隔音也蠻好的 親子友善程度也很好 早餐的品項豐富</p>
+                    <a href="#"><h4>MB00006</h4></a>
                     <div class="star">
                         <a href="#"><i class="fa fa-star"></i></a>
                         <a href="#"><i class="fa fa-star"></i></a>
                         <a href="#"><i class="fa fa-star"></i></a>
                         <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star-half-o"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="media testimonial_item">
-                <img class="rounded-circle" src="image/testtimonial-1.jpg" alt="">
-                <div class="media-body">
-                    <p>As conscious traveling Paupers we must always be concerned about our dear Mother Earth. If you think about it, you travel across her face, and She is the </p>
-                    <a href="#"><h4 class="sec_h4">Fanny Spencer</h4></a>
+            <div class="media testimonial_item" style="border-radius:10px">
+                <div class="media-body sec_h4">
+                    <p>房間乾淨，房間和床都算大，整體而言還不錯，中西式的自助早餐，菜色豐富，餐廳明亮寬敞。</p>
+                    <a href="#"><h4>MB00007</h4></a>
                     <div class="star">
                         <a href="#"><i class="fa fa-star"></i></a>
                         <a href="#"><i class="fa fa-star"></i></a>
                         <a href="#"><i class="fa fa-star"></i></a>
                         <a href="#"><i class="fa fa-star"></i></a>
-                        <a href="#"><i class="fa fa-star-half-o"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+      
+    </div>
 </section>
 <!--================ Testimonial Area  =================-->
 <!--================ Latest Blog Area  =================-->
 <section class="latest_blog_area section_gap">
+    <div class="white-block">
     <div class="container">
-        <div class="section_title text-center">
+        <div class="section_title text-center fade-in">
             <h2 class="title_color">體驗活動</h2>
-            <p>The French Revolution constituted for the conscience of the dominant aristocratic class a fall from </p>
+            <p>與我們一同探索當地文化，留下難忘的回憶和珍貴的體驗</p>
+            <span class="blue-line"></span>
         </div>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -320,16 +313,18 @@
                 <li data-target="#myCarousel" data-slide-to="1"></li>
                 <li data-target="#myCarousel" data-slide-to="2"></li>
             </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="~/image/blog/blog-1.jpg" alt="Slide 1">
-                </div>
-                <div class="carousel-item">
-                    <img src="~/image/blog/blog-2.jpg" alt="Slide 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="~/image/blog/blog-3.jpg" alt="Slide 3">
-                </div>
+            <div class="carousel-inner fade-in">
+                @for (int i = 0; i < Model.ActivityImage.Count; i += 3)
+                {
+                    <div class="carousel-item @((i == 0) ? "active" : "")">
+                        @for (int j = i; j < i + 3 && j < Model.ActivityImage.Count; j++)
+                        {
+                            <a href="@Url.Action("ActivityByDetails", "Activity", new { id = Model.ActivityID[j] })">
+                                <img src="~/image/@Model.ActivityImage[j]" style="width:360px;height:360px" alt="Slide @(j % 3 + 1)">
+                            </a>
+                        }
+                    </div>
+                }
             </div>
             <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -341,56 +336,126 @@
             </a>
         </div>
 
- @*       <div class="row mb_30">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-recent-blog-post">
-                    <div class="thumb">
-                        <img class="img-fluid" src="image/blog/blog-1.jpg" alt="post">
+
+        <div>
+
+
+                <script type="text/javascript" src="https://popupsmart.com/freechat.js"></script><script>window.start.init({ title: "Hi there ✌️", message: "你好，請問有什麼可以幫你的呢?", color: "#1C86FA", position: "right", placeholder: "Enter your message", withText: "Write with", viaWhatsapp: "Or write us directly via Whatsapp", gty: "Go to your", awu: "and write us", connect: "Connect now", button: "Write us", device: "mobile", logo: "https://d2r80wdbkwti6l.cloudfront.net/t92kyZpzOpCh5UpxYcc1bzfXSdGKrE6i.jpg", person: "https://d2r80wdbkwti6l.cloudfront.net/W2Wy9BMlZ587LgOApPGQn5hoMXYBvwPY.jpg", services: [{ "name": "messenger", "content": "100001378891921" }] })</script>
+       
+            
+            
+            </div>
+
+
+@*        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            @for (int i = 0; i < Model.ActivityImage.Count;)
+            {
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <a href="@Url.Action("ActivityByDetails", "Activity", new { id = Model.ActivityID[i] })">
+                        <img src="~/image/@Model.ActivityImage[i]" style="width:360px;height:360px" alt="Slide 1">
+                        </a>
+                        <a href="@Url.Action("ActivityByDetails", "Activity", new { id = Model.ActivityID[i+1] })">
+                        <img src="~/image/@Model.ActivityImage[i+1]" style="width:360px;height:360px" alt="Slide 2">
+                        </a>
+                        <a href="@Url.Action("ActivityByDetails", "Activity", new { id = Model.ActivityID[i+2] })">
+                        <img src="~/image/@Model.ActivityImage[i+2]" style="width:360px;height:360px" alt="Slide 3">
+                        </a>
                     </div>
-                    <div class="details">
-                        <div class="tags">
-                            <a href="#" class="button_hover tag_btn">Travel</a>
-                            <a href="#" class="button_hover tag_btn">Life Style</a>
-                        </div>
-                        <a href="#"><h4 class="sec_h4">Low Cost Advertising</h4></a>
-                        <p>Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer.</p>
-                        <h6 class="date title_color">31st January,2018</h6>
+                    <div class="carousel-item">
+                        <a href="@Url.Action("ActivityByDetails", "Activity", new { id = Model.ActivityID[i+3] })">
+                        <img src="~/image/@Model.ActivityImage[i+3]" style="width:360px;height:360px" alt="Slide 1">
+                        </a>
+                        <a href="@Url.Action("ActivityByDetails", "Activity", new { id = Model.ActivityID[i+4] })">
+                        <img src="~/image/@Model.ActivityImage[i+4]" style="width:360px;height:360px" alt="Slide 2">
+                        </a>
+                        <a href="@Url.Action("ActivityByDetails", "Activity", new { id = Model.ActivityID[i+5] })">
+                        <img src="~/image/@Model.ActivityImage[i+5]" style="width:360px;height:360px" alt="Slide 3">
+                        </a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="@Url.Action("ActivityByDetails", "Activity", new { id = Model.ActivityID[i+6] })">
+                        <img src="~/image/@Model.ActivityImage[i+6]" style="width:360px;height:360px" alt="Slide 1">
+                        </a>
+                        <a href="@Url.Action("ActivityByDetails", "Activity", new { id = Model.ActivityID[i+7] })">
+                        <img src="~/image/@Model.ActivityImage[i+7]" style="width:360px;height:360px" alt="Slide 2">
+                        </a>
+                        <a href="@Url.Action("ActivityByDetails", "Activity", new { id = Model.ActivityID[i+8] })">
+                        <img src="~/image/@Model.ActivityImage[i+8]" style="width:360px;height:360px" alt="Slide 3">
+                        </a>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-recent-blog-post">
-                    <div class="thumb">
-                        <img class="img-fluid" src="image/blog/blog-2.jpg" alt="post">
-                    </div>
-                    <div class="details">
-                        <div class="tags">
-                            <a href="#" class="button_hover tag_btn">Travel</a>
-                            <a href="#" class="button_hover tag_btn">Life Style</a>
-                        </div>
-                        <a href="#"><h4 class="sec_h4">Creative Outdoor Ads</h4></a>
-                        <p>Self-doubt and fear interfere with our ability to achieve or set goals. Self-doubt and fear are</p>
-                        <h6 class="date title_color">31st January,2018</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-recent-blog-post">
-                    <div class="thumb">
-                        <img class="img-fluid" src="image/blog/blog-3.jpg" alt="post">
-                    </div>
-                    <div class="details">
-                        <div class="tags">
-                            <a href="#" class="button_hover tag_btn">Travel</a>
-                            <a href="#" class="button_hover tag_btn">Life Style</a>
-                        </div>
-                        <a href="#"><h4 class="sec_h4">It S Classified How To Utilize Free</h4></a>
-                        <p>Why do you want to motivate yourself? Actually, just answering that question fully can </p>
-                        <h6 class="date title_color">31st January,2018</h6>
-                    </div>
-                </div>
-            </div>
+                i += 9;
+            }
+       
+           
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>*@
+
+
+        @*       <div class="row mb_30">
+        <div class="col-lg-4 col-md-6">
+        <div class="single-recent-blog-post">
+        <div class="thumb">
+        <img class="img-fluid" src="image/blog/blog-1.jpg" alt="post">
+        </div>
+        <div class="details">
+        <div class="tags">
+        <a href="#" class="button_hover tag_btn">Travel</a>
+        <a href="#" class="button_hover tag_btn">Life Style</a>
+        </div>
+        <a href="#"><h4 class="sec_h4">Low Cost Advertising</h4></a>
+        <p>Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer.</p>
+        <h6 class="date title_color">31st January,2018</h6>
+        </div>
+        </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+        <div class="single-recent-blog-post">
+        <div class="thumb">
+        <img class="img-fluid" src="image/blog/blog-2.jpg" alt="post">
+        </div>
+        <div class="details">
+        <div class="tags">
+        <a href="#" class="button_hover tag_btn">Travel</a>
+        <a href="#" class="button_hover tag_btn">Life Style</a>
+        </div>
+        <a href="#"><h4 class="sec_h4">Creative Outdoor Ads</h4></a>
+        <p>Self-doubt and fear interfere with our ability to achieve or set goals. Self-doubt and fear are</p>
+        <h6 class="date title_color">31st January,2018</h6>
+        </div>
+        </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+        <div class="single-recent-blog-post">
+        <div class="thumb">
+        <img class="img-fluid" src="image/blog/blog-3.jpg" alt="post">
+        </div>
+        <div class="details">
+        <div class="tags">
+        <a href="#" class="button_hover tag_btn">Travel</a>
+        <a href="#" class="button_hover tag_btn">Life Style</a>
+        </div>
+        <a href="#"><h4 class="sec_h4">It S Classified How To Utilize Free</h4></a>
+        <p>Why do you want to motivate yourself? Actually, just answering that question fully can </p>
+        <h6 class="date title_color">31st January,2018</h6>
+        </div>
+        </div>
+        </div>
+        </div>*@
+    </div>
     </div>
 </section>
 <!--================ Recent Area  =================-->
@@ -398,3 +463,45 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>*@
+
+<script>
+
+    function getSearchRoomValue() {
+        var checkInDate = document.getElementById("checkInDate").value;
+        var checkOutDate = document.getElementById("checkOutDate").value;
+        var hotelId = document.getElementById("hotelId").value;
+
+        //fetch(`/Order/List?checkInDate=${encodeURIComponent(checkInDate)}&checkOutDate=${encodeURIComponent(checkOutDate)}&hotelId=${encodeURIComponent(hotelId)}`, {
+        //    method: 'POST',
+        //    headers: { 'Content-Type': 'application/json' },
+        //})
+        //~/
+        console.log(checkInDate)
+        var url = `/Order/List?checkInDate=${encodeURIComponent(checkInDate)}&checkOutDate=${encodeURIComponent(checkOutDate)}&hotelId=${encodeURIComponent(hotelId)}`;
+
+        window.location.href = url;
+
+    }
+
+    window.addEventListener('scroll', function () {
+        var elements = document.querySelectorAll('.fade-in');
+
+        for (var i = 0; i < elements.length; i++) {
+            var element = elements[i];
+            var position = element.getBoundingClientRect().top;
+            var windowHeight = window.innerHeight;
+
+            if (position < windowHeight - 50) {
+                element.classList.add('show');
+            }
+        }
+    });
+
+</script>
+
+
+
+
+
+
+

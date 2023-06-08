@@ -1,0 +1,237 @@
+﻿@*@model IEnumerable<HotelOrderFinal.Models.DiscountDetail>*@
+@model HotelOrderFinal.ViewModels.COrderDetailViewModel
+
+
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .area {
+            padding: 5px;
+            margin: 10px;
+            /*border: solid green;
+            border-radius: 20px;*/
+        }
+        .area-big{
+            padding: 5px;
+            margin: 10px;
+            border: solid #52c5fd;
+            border-radius: 20px;
+        }
+        .row {
+            display: flex;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        h2 {
+            margin: 10px;
+            text-decoration: underline;
+            /*  text-decoration-style: dotted;
+                                                      text-decoration-color: red;*/
+        }
+
+        ol {
+            margin-left: 30px;
+            padding: 5px;
+        }
+
+        textarea {
+            width: 95%;
+            rows: 2;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        .even-row {
+            background-color: #f8f9fa;
+        }
+
+        .lab1 {
+            width: 200px;
+        }
+
+        .delete-button {
+            btn btn-primary;
+        }
+        th{
+            white-space:nowrap;
+        }
+        
+        .blue-line{
+            width:90%;
+            background-color: #b0e5ff;
+        }
+    </style>
+    
+</head>
+
+
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h1 class="page-cover-tittle">訂房明細</h1>
+        </div>
+    </div>
+</section>
+
+<body style="background: #E1F5FE">
+      <div style="margin: 80px;padding: 10px 10px 150px 50px; background-color: white; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);">
+    <div class="col-md-10 offset-md-1 ">
+        <div class="area-big">
+        <form action="SaveDB">
+            <div class="area">
+                <div>
+                    <h2>房間明細</h2>
+                </div>
+                <div style="margin:10px;">
+                    <table id="SessionRoomList" style="box-sizing: border-box ; width:100% ;text-align:center;">
+                        @*<tbody>
+                        <tr style="background-color: #f0f0f0;">
+                        <th width="25%">住宿時間</th>
+                        <th width="25%">房間類型</th>
+                        <th width="10%">數量</th>
+                        <th width="15%">人數</th>
+                        <th width="15%">小計</th>
+                        <th width="10%">刪除</th>
+                        </tr>
+                        <tr>
+                        <td><p>入住日期</p><p>2023/5/7</p><p>退房日期</p><p>2023/5/8</p></td>
+                        <td>雙人房</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>NT$ 4000</td>
+                        <td>刪除</td>
+                        </tr>
+                        </tbody>*@
+                    </table>
+                </div>
+            </div>
+            <div id="ActivityList">
+                @*<div class="area">
+                <div>
+                <h2>活動列表</h2>
+                <div class="row">
+                <table  style="box-sizing: border-box ; width:100% ;text-align:center;">
+                <tbody>
+                <tr style="background-color: #f0f0f0;">
+                <th width="25%">活動日期</th>
+                <th width="25%">活動名稱</th>
+                <th width="20%">參加人數</th>
+                <th width="20%">小計</th>
+                <th width="10%">刪除</th>
+                </tr>
+                <tr>
+                <td>item.ActivityTime</td>
+                <td>item.ActivityName</td>
+                <td>
+                <select id="ActivityPeople">
+                @{
+
+                for(int i =1; i<7;i++)
+                {
+                <option value="i" >i</option>
+                }
+                }
+                </select>
+                </td>
+                <td>NT$ item.ActivityCost</td>
+                <td>刪除</td>
+                </tr>
+                </tbody>
+                </table>
+                </div>
+                </div>
+                </div>*@
+            </div>
+            <div class="blue-line"></div>
+            <div class="area">
+                <div>
+                    <h2>優惠券</h2>
+                </div>
+                <div  id="Discount" class="form-group col-md-2">
+                  @*  <select id="DiscountDiscount" name="DiscountDiscount">*@
+                        @*<option value="item.DiscountDiscount">item.DiscountName</option>*@
+                @*    </select>*@
+
+                    @*<select id="discountSelect" name="discountSelect">
+                    @foreach (var item in Model)
+                    {
+                    <option value="@item.Discount.DiscountDiscount">@Html.DisplayFor(modelItem => item.Discount.DiscountName)</option>
+                    }
+                    </select>*@
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <table style="width:100%">
+                            <tr>
+                                <th>總金額</th>
+                                <td id="OrderDetailTotalPrice" class="text-center">NT$ 0</td>
+
+                            </tr>
+                            <tr id="discountRow" style="display:none;">
+                                <th width="25%">折扣後總金額</th>
+                                <td id="discountAmount" class="text-center">NT$ 0</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+                    <div class="blue-line"></div>
+            <div class="area">
+                <div>
+                    <h2>付款方式</h2>
+                    <div class="row">
+                        <label class="lab1">
+                            <input type="radio" name="pay" value="cash" required checked />現金
+                        </label>
+                        <label class="lab1">
+                            <input type="radio" name="pay" value="creditcard" />信用卡
+                        </label>
+                    </div>
+                </div>
+            </div>
+                    <div class="blue-line"></div>
+            <div class="area">
+                <div>
+                    <h2>注意事項</h2>
+                    <ol>
+                        <li>飯店入住時間：下午3點之後；退房時間：中午11點以前。</li>
+                        <li>飯店全館禁止吸菸及謝絕寵物入住(除導盲犬)，謝謝合作。</li>
+                        <li>入住時請出示身分證或護照以便住宿登記。</li>
+                        @*<li>平、旺、假日之定義，將依飯店規定為主。</li>*@
+                    </ol>
+                </div>
+                      
+                <div>
+                        
+                    <h2>備註</h2>
+                    <textarea id="txtRemark" name="txtRemark "></textarea>
+                </div>
+            </div>
+            
+          
+        </form>
+    </div>
+            <div class="row justify-content-end">
+                <div class="col-md-2">
+                    <a href="#">@Html.ActionLink("返回上一頁", "List", "Order", null, new { @class = "btn btn-primary btn-block" })</a>
+                </div>
+                <div class="col-md-2">
+                    @*<a href="#" onclick="getOrderDetailValue();" class="btn btn-primary btn-block">付款 </a>*@
+                    <a href="#">@Html.ActionLink("確認訂單", "ShowOrder", "Order", null, new { @class = "btn btn-primary btn-block" })</a>
+                    @*<input type="submit"/>*@
+                </div>
+            </div>
+        </div>
+  </div>
+  </body>
+  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/ForOrder.js"></script>

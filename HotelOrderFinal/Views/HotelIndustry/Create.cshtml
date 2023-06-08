@@ -1,0 +1,105 @@
+﻿@model HotelOrderFinal.Models.HotelIndustry
+
+@{
+    ViewData["Title"] = "Create";
+}
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">About Us</h2>
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">About</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+<h1>新增飯店資料</h1>
+
+<h4>飯店資料</h4>
+<hr />
+<div class="row" >
+    <div class="col-md-6">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="HotelName" class="control-label">飯店名稱</label>
+                <input asp-for="HotelName" class="form-control" />
+                <span asp-validation-for="HotelName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HotelPhone" class="control-label">飯店電話號碼</label>
+                <input asp-for="HotelPhone" class="form-control" />
+                <span asp-validation-for="HotelPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HotelRegionId" class="control-label">飯店區域ID(北部為1 /中部為2 /南部為3)</label>
+                <input asp-for="HotelRegionId" class="form-control" />
+                <span asp-validation-for="HotelRegionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HotelAddress" class="control-label">飯店地址</label>
+                <input asp-for="HotelAddress" class="form-control" />
+                <span asp-validation-for="HotelAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lat" class="control-label">緯度</label>
+                <input asp-for="Lat" class="form-control" />
+                <span asp-validation-for="Lat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lng" class="control-label">經度</label>
+                <input asp-for="Lng" class="form-control" />
+                <span asp-validation-for="Lng" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HotelImageDiscription" class="control-label">飯店內容敘述</label>
+                <input asp-for="HotelImageDiscription" class="form-control" />
+                <span asp-validation-for="HotelImageDiscription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                    <label class="control-label">飯店照片</label>
+                    <input type="file" name="photo" class="form-control" />
+            </div>
+
+            @*            <div class="form-group col-md-10">
+            <label class="control-label">飯店照片</label>
+            <input type="file" name="photo" class="form-control" />
+            </div>*@
+            <br />
+            <div class="form-group">
+                <input type="submit" value="送出" class="btn btn-primary" style="margin-right:10px; margin-bottom:10px;" />
+                <button class="btn btn-secondary" style="margin-right:10px; margin-bottom:10px;" asp-action="ListView">回到飯店一覽</button>
+                <button type="button" class="btn btn-secondary" onclick="demo()" style="margin-right:10px; margin-bottom:10px;">Demo</button>
+                <br />
+                <button class="btn btn-danger" asp-action="Index" asp-controller="Home">回到首頁</button>
+            </div>
+        </form>
+    </div>
+</div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        function demo() {
+            // 設定 Demo 評價
+            // 取得表單元素和欄位元素
+            document.getElementById("HotelName").value = "墾丁飯店";
+            document.getElementById("HotelPhone").value = "01234567";
+            document.getElementById("HotelRegionId").value = 3;
+            document.getElementById("HotelAddress").value = "Demo用墾丁飯店住址";
+            document.getElementById("Lat").value = 22.05595075828875;
+            document.getElementById("Lng").value = 120.77406132125643;
+            document.getElementById("HotelImageDiscription").value = "Demo飯店展示用敘述Demo飯店展示用敘述Demo飯店展示用敘述Demo飯店展示用敘述Demo飯店展示用敘述Demo飯店展示用敘述Demo飯店展示用敘述Demo飯店展示用敘述Demo飯店展示用敘述Demo飯店展示用敘述";
+        }
+    </script>
+}

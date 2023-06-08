@@ -1,0 +1,126 @@
+﻿@model HotelOrderFinal.Models.Comment
+
+@{
+    ViewData["Title"] = "EditByAdmin";
+}
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">後台管理系統：評論管理</h2>
+        </div>
+    </div>
+</section>
+<p></p>
+<head>
+    <title>評點&評論</title>
+    <style>
+        .card-text {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            overflow: hidden;
+        }
+        /* .類別名 可套用在不同標籤上*/
+        .left {
+            width: 400px;
+            float: left;
+            margin-left: 50px;
+        }
+        /* 不能任意調整文字框大小 */
+        textarea {
+            margin-left: 10px;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2" style="background-color: #f2f2f2;">
+            </div>
+
+            <div class="col-md-10">
+                <p></p>
+                <h4>修改評論</h4>
+                <hr />
+
+                <div class="row">
+                    <div class="col-md-4" 　style="font-size: 17px">
+
+                        <form asp-action="EditByAdmin">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <input type="hidden" asp-for="CommentId" />
+                                <span asp-validation-for="CommentId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="MemberId" class="control-label"></label>
+                                <input asp-for="MemberId" class="form-control" readonly />
+                                <span asp-validation-for="MemberId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CommentDate" class="control-label"></label>
+                                <input asp-for="CommentDate" class="form-control" readonly />
+                                <span asp-validation-for="CommentDate" class="text-danger"></span>
+                            </div>
+                            @*                            <div class="form-group">
+                            <label class="lab1">
+                            <input sp-for="CommentClass" type="radio" name="CommentClass" value="1" required/>整體
+                            </label>
+                            <label class="lab1">
+                            <input sp-for="CommentClass" type="radio" name="CommentClass" value="2" />房間
+                            </label>
+                            <label class="lab1">
+                            <input sp-for="CommentClass" type="radio" name="CommentClass" value="3" />服務
+                            </label>
+                            </div>*@
+                            <div class="form-group">
+                                <label asp-for="CommentClass" class="control-label">分類：１-整體２-房間３-服務</label>
+                                <input asp-for="CommentClass" class="form-control" type="text" maxlength="1" pattern="[1-3]{1}" />
+                                <span asp-validation-for="CommentClass" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CommentPoint" class="control-label">評　點：(1-5)</label>
+                                <input asp-for="CommentPoint" class="form-control" type="text" maxlength="1" pattern="[1-5]{1}">
+                                @*                                <input type="hidden" asp-for="CommentPoint" />*@
+                                <span asp-validation-for="CommentPoint" class="text-danger"></span>
+                            </div>
+
+                            <div class="sub">
+                                <label asp-for="CommentDetail" class="control-label"></label>
+                                <textarea asp-for="CommentDetail" cols="40" rows="5"></textarea>
+                                <span asp-validation-for="CommentDetail" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="儲存" class="btn btn-primary" />
+                                <a asp-action="ListByAdmin" class="btn btn-warning">取消</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+@section Scripts {
+   // 假設你有一個名為valueToSelect的變數，其中包含你要選中的value值
+var valueToSelect = "2";
+
+// 使用querySelectorAll選取所有具有相同name屬性的radio按鈕
+var radioButtons = document.querySelectorAll('input[name="CommentClass"]');
+
+// 迭代每個radio按鈕，並檢查其value值是否等於要選中的值
+radioButtons.forEach(function(radioButton) {
+  if (radioButton.value === valueToSelect) {
+    radioButton.checked = true; // 設定該radio按鈕為選中狀態
+  }
+});
+
+
+                }
+

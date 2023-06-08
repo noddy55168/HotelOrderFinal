@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "註冊成功";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+   
+</head>
+<body>
+    @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+    {
+        <div id="successMessage">@ViewBag.SuccessMessage</div>
+        <script>
+            // 顯示成功訊息
+            alert("註冊成功，請重新登入");
+            window.location.href = '@Url.Action("Index", "Home")';
+        </script>
+    }
+</body>
+</html>

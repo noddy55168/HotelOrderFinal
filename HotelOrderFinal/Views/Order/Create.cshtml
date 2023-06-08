@@ -1,0 +1,118 @@
+﻿@model IEnumerable<HotelOrderFinal.Models.RoomMember>
+
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">資料確認</h2>
+        </div>
+    </div>
+</section>
+
+<head>
+    <style>
+        label {
+            width: 100px;
+        }
+
+        .lab1 {
+            width: 200px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            margin-left: 0px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div style="background-color:bisque; margin-bottom:10px;margin-top:10px; height:80px;">
+        <!--步驟-->
+        <div class="progress" style="width:100%">
+            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        @*<ul >
+        <li>
+        <span class="athTHRS__number">1</span>查詢空房
+
+        </li>
+        <li ><span >2</span>訂房明細
+        </li>
+        <li ><span >3</span>資料確認
+        </li>
+        <li ><span >4</span>訂單完成
+        </li>
+        </ul>
+        </div>*@
+    </div>
+<table class="table">
+    <thead>
+        <div class="col-md-10 offset-md-1 ">
+            <h2>會員資料</h2>
+                @foreach ( var item in Model )
+                {
+                    <form>
+                        <div class="form-group">
+                            <label>姓名:</label>
+                            <input type="text" id="account" name="account" value="@Html.DisplayFor(modelItem => item.MemberName)" readonly="true" />
+                        </div>
+                        <div class="form-group">
+                            <label>手機:</label>
+                            <input type="text" id="phone" name="phone" value="@Html.DisplayFor(modelItem => item.MemberPhone)" readonly="true" />
+                        </div>
+                        <div class="form-group">
+                            <label>電子郵件:</label>
+                            <input type="text" id="email" name="email" value="@Html.DisplayFor(modelItem => item.MemberEmail)" readonly="true" />
+                        </div>
+                    </form>
+                }
+        </div>
+    </thead>
+    <tbody>
+            <div class="col-md-10 offset-md-1">
+            <h2>付款方式</h2>
+            <div class="row">
+                <label class="lab1">
+                    <input type="radio" name="pay" value="cash" required checked />現金(現場支付)
+                </label>
+                <label class="lab1">
+                    <input type="radio" name="pay" value="creditcard" />信用卡
+                </label>
+            </div>
+        </div>
+            <div class="col-md-10 offset-md-1">
+            <h2>注意事項</h2>
+            <ol>
+                <li>飯店入住時間：下午3點之後；退房時間：中午11點以前。</li>
+                <li>飯店全館禁止吸菸及謝絕寵物入住(除導盲犬)，謝謝合作。</li>
+                <li>入住時請出示身分證或護照以便住宿登記。</li>
+                <li>平、旺、假日之定義，將依飯店規定為主。</li>
+
+            </ol>
+        </div>
+            <div class="col-md-10 offset-md-1">
+            <h2>備注</h2>
+            <textarea style="width:500px" rows="2"></textarea>
+        </div>
+
+
+        <div class="row justify-content-end">
+            <div class="col-md-2">
+                <a href="#">@Html.ActionLink("返回上一頁", "Detail", "Order", null, new { @class = "btn btn-primary btn-block" })</a>
+            </div>
+            <div class="col-md-2">
+                <a href="#">@Html.ActionLink("付款", "ShowOrder", "Order", null, new { @class = "btn btn-primary btn-block" })</a>
+            </div>
+        </div>
+    </tbody>
+</table>
+</body>
+
+@section Scripts{
+    <script>
+
+    </script>
+}

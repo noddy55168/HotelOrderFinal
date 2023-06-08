@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData ["Title"] = "Login";
+}
+
+<div class="wrapper ">
+    @using ( Html.BeginForm ( "Login" , "Admin" , FormMethod.Post ) )
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label for="AdminAccount">管理者帳號</label>
+            <input type="tel" id="AdminAccount" name="AdminAccount" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="AdminPassword">管理者密碼</label>
+            <input type="password" id="AdminPassword" name="AdminPassword" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">登入</button>
+            <button type="button" class="btn btn-primary" onclick="demoLoginForAdmin() ">Demo</button>
+            @*<a href="@Url.Action("ForgotPassword", "Admin")" class="btn btn-primary">忘記密碼</a>*@
+        </div>
+    }
+
+    @{
+        var errorMessage = TempData["AdminErrorMessage"] as string;
+    }
+
+    @if ( !string.IsNullOrEmpty ( errorMessage ) )
+    {
+        <script>
+            alert("管理者帳號密碼錯誤，請重新確認，謝謝!");
+        </script>
+    }
+</div>
+
+    <script>
+        function demoLoginForAdmin() {
+            // 設定後台管理者號碼和密碼欄位的值
+            document.getElementById("AdminAccount").value = "LoginAdmin01";
+            document.getElementById("AdminPassword").value = "ThisAdminPassword123";
+        }
+    </script>

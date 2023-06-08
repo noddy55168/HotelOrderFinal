@@ -1,0 +1,151 @@
+﻿@model IEnumerable<HotelOrderFinal.Models.RoomMember>
+
+@{    
+    ViewData["Title"] = "List";
+}
+<style>
+
+</style>
+<link rel="stylesheet" href="~/css/ForAdminTable.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">後台管理系統：會員管理</h2>
+        </div>
+    </div>
+</section>
+<div class="Adminwrapper">
+<div class="row">    
+
+    <div class="col-xs-12 col-md-2">
+        <div class=" ">
+            <div class=" ">
+                <div class="">
+                    @{
+                        var AdminId = Context.Session.GetString("AdminId");
+                    }
+
+                </div>
+            </div>
+            <div class="">
+                <h2 style="text-align: center">
+                    @Html.ActionLink(AdminId, "List", "Admin")
+                </h2>
+                <ul class="list" style="list-style: none; padding: 0;">
+
+                    <!--改成手風琴下拉式-->
+                    <li>
+                        @Html.ActionLink("會員管理", "List", "MemberMange", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("房型管理", "AdminRoom", "Room", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("活動管理", "ActivityByCreate", "Activity", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("訂房管理", "EditPassword", "Member", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("飯店一覽管理", "ListView", "HotelIndustry", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("優惠折扣管理", "List", "Discount", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("評論管理", "ListByAdmin", "Comment", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="selectedItemContent" class="col-xs-12 col-md-10 ">
+        <!-- 這裡會顯示點選的項目的內容 -->
+            <div id="searchForm">
+            <div class="row" style="margin: 10px;">
+            @using (Html.BeginForm())
+            {
+                        @:關鍵字 @Html.TextBox("txtKeyword")
+                        <input type="submit" value="查詢" autocomplete="off">
+                        <input id="clearButton" type="button" value="清除搜尋結果">
+            }
+            </div>
+<div class="table-responsive">
+                <table class="table" style="vertical-align: middle; text-align:center">
+        <thead>
+            <tr>
+                @*<th>管理員ID</th>*@
+                                <th style="width:100px;">會員編號</th>
+                                <th style ="width:100px;">會員姓名</th>
+                                <th style ="width:120px;">會員生日</th>
+                                <th style ="width:100px;">會員性別</th>
+                                <th style ="width:125px;">會員身份</th>
+                                <th style ="width:125px;">會員電話</th>
+                                <th style ="width:250px;">電子郵件</th>
+                        @* <th>會員照片</th>
+                <th>會員密碼</th>
+               <th>會員等級</th>*@
+                                <th style="width:140px;">會員訂單總數</th>
+                                <th style="width:130px;"><a asp-action="Create" class="btn btn-primary">新增會員</a></th>
+            </tr>
+        </thead>
+        <tbody>
+                       
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @*<td>@Html.DisplayFor(modelItem => item.AdminId)</td>*@
+                                <td class="member-id">@Html.DisplayFor(modelItem => item.MemberId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MemberName)</td>
+                    <td>@(item.MemberBirthday.HasValue ? item.MemberBirthday.Value.Date.ToString("yyyy/MM/dd") : string.Empty)</td>
+                                <td>
+                                    @if (item.MemberGender == "男")
+                                    {
+                                        <span class="text-primary">@Html.DisplayFor(modelItem => item.MemberGender)</span>
+                                    }
+                                    else if (item.MemberGender == "女")
+                                    {
+                                        <span class="text-danger">@Html.DisplayFor(modelItem => item.MemberGender)</span>
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.MemberGender)
+                                    }
+                                </td>
+                    <td>@Html.DisplayFor(modelItem => item.MemberIdentity)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MemberPhone)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MemberEmail)</td>
+                   @* <td><img src="@item.MemberPhoto" width="20" height="20" /></td>
+                    <td>@Html.DisplayFor(modelItem => item.MemberPassword)</td>
+                  <td>@Html.DisplayFor(modelItem => item.MemberLavel)</td>*@
+                    <td>@Html.DisplayFor(modelItem => item.MemberOrderTotal)</td>
+                    <td>
+                                    @Html.ActionLink("修改", "Edit", new { id = item.MemberId },new { @class="btn btn-success"})
+                                   @* @Html.ActionLink("刪除", "Delete", new { id = item.MemberId },new { @class="btn btn-danger", onclick="return confirm('確定要刪除嗎?')"})*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+                @if (!string.IsNullOrEmpty(ViewData["Message"] as string))
+                {
+                    <div class="text-center">
+                    <h4>@ViewData["Message"]</h4>
+                    </div>
+                }
+
+            </div>
+            </div>
+</div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("clearButton").addEventListener("click", function () {
+        document.getElementById("txtKeyword").value = ""; // 清除關鍵字
+        document.querySelector("form").submit();
+    });
+</script>

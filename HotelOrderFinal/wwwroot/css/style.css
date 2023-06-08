@@ -83,15 +83,15 @@ a:hover, a:focus {
 }
 
 body {
-  line-height: 24px;
-  font-size: 14px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 300;
-  color: #777777;
+    line-height: 24px;
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    color: #777777;
 }
 
 section {
-  background: #fff;
+    background: #dcebfd;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -141,7 +141,7 @@ button:focus {
 }
 
 .section_title p {
-  font-size: 14px;
+  font-size: 18px;
   line-height: 30px;
   color: #777777;
   margin-bottom: 0px;
@@ -323,14 +323,18 @@ button:focus {
 }
 
 .navbar {
-  padding: 0px;
-  border: 0px;
-  border-radius: 0px;
+    padding: 0px;
+    border: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    ;
 }
 
 .navbar {
-  background: #fff;
-  padding: 0px 25px;
+    background: #436c976b;
+    padding: 0px 25px;
 }
 
 .navbar .logo_h {
@@ -339,7 +343,7 @@ button:focus {
 
 .navbar .menu_nav .nav-item .nav-link {
   font: 500 18px/80px "Poppins", sans-serif;
-  color: #222222;
+  color: #FFF;
   text-transform: uppercase;
   padding: 0px;
 }
@@ -464,18 +468,18 @@ button:focus {
 }
 
 .navbar_fixed {
-  position: fixed;
-  width: 100%;
-  left: 0;
-  background: #fff;
-  top: 0;
-  top: -50px;
-  -webkit-transform: translateY(50px);
-  -ms-transform: translateY(50px);
-  transform: translateY(50px);
-  -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-  transition: transform 300ms ease, background 300ms ease, -webkit-transform 300ms ease;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    background: #7AA5D2;
+    top: 0;
+    top: -50px;
+    -webkit-transform: translateY(50px);
+    -ms-transform: translateY(50px);
+    transform: translateY(50px);
+    -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    transition: transform 300ms ease, background 300ms ease, -webkit-transform 300ms ease;
 }
 
 .navbar_fixed .navbar {
@@ -673,7 +677,7 @@ button:focus {
 }
 
 .breadcrumb_area .bg-parallax {
-  background: url("../../image/about_banner.jpg") no-repeat scroll center 0/cover;
+  background: url("../../image/about_banner2.jpg") no-repeat scroll center 0/cover;
   opacity: 0.50;
   z-index: -1;
 }
@@ -828,10 +832,10 @@ button:focus {
   overflow: hidden;
 }
 
-.facilities_area .bg-parallax {
-  background: url("../../image/facilites_bg.jpg") no-repeat scroll center 0/cover;
-  opacity: 0.15;
-}
+    .facilities_area .bg-parallax {
+        background: url("../../image/istockphoto.jpg") no-repeat scroll center 0/cover;
+        opacity: 0.40;
+    }
 
 .facilities_item {
   border: 1px solid #777777;

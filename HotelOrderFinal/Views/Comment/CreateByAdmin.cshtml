@@ -1,0 +1,156 @@
+﻿@model HotelOrderFinal.Models.Comment
+
+@{
+    ViewData["Title"] = "CreateByAdmin";
+}
+
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">後台管理系統:評論管理</h2>
+        </div>
+    </div>
+</section>
+<p></p>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*    <title>評點&評論</title>*@
+    <link rel="stylesheet" href="../css/start.css" />
+    <style>
+        .card-text {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            overflow: hidden;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* .類別名 可套用在不同標籤上*/
+        .left {
+            width: 400px;
+            float: left;
+            margin-left: 100px;
+        }
+
+        .t1 {
+            /* float: left; 文繞圖浮動到左邊*/
+            float: left;
+        }
+
+        .t2 {
+            width: 400px;
+            text-align: center;
+        }
+
+        .sub {
+            width: 400px;
+            /* 捲軸:視需要自動啟動 */
+            overflow: auto;
+            margin-left: 10px;
+            text-align: start;
+        }
+        /* 不能任意調整文字框大小 */
+        textarea {
+            margin-left: 10px;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2" style="background-color: #f2f2f2;">
+            </div>
+            <div class="col-md-10">
+                <p></p>
+                <h4>新增評論</h4>
+                <hr />
+
+                <div class="row">
+                    <div class="col-md-4" style="font-size: 17px">
+
+                        <form asp-action="CreateByAdmin">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <input type="hidden" asp-for="CommentDate" value=getdate() />
+                                <span asp-validation-for="CommentDate" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="MemberId" class="control-label"></label>
+                                <input asp-for="MemberId" class="form-control" />
+                                <span asp-validation-for="MemberId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>評價分類：</label>
+                                <label class="lab1">
+                                    <input sp-for="CommentClass" type="radio" name="CommentClass" value="1" required checked />整體
+                                </label>
+                                <label class="lab1">
+                                    <input sp-for="CommentClass" type="radio" name="CommentClass" value="2"/>房間
+                                </label>
+                                <label class="lab1">
+                                    <input sp-for="CommentClass" type="radio" name="CommentClass" value="3" />服務
+                                </label>
+                            </div>
+                            <label>請給予評點:</label>
+                            <div id="stars" class="left">
+                                <img src="../image/comment/empty.png" title="非常失望" alt="">
+                                <img src="../image/comment/empty.png" title="不滿意" alt="">
+                                <img src="../image/comment/empty.png" title="普通" alt="">
+                                <img src="../image/comment/empty.png" title="滿意" alt="">
+                                <img src="../image/comment/empty.png" title="非常滿意" alt="">
+                                <span id="score"></span>
+                            </div>
+
+                            <p></p>
+                            <input type="hidden" asp-for="CommentPoint" value="-1" />
+                            <span asp-validation-for="CommentPoint"></span>
+                            <br>
+
+                            <div class="sub">
+                                <label asp-for="CommentDetail" class="control-label"></label>
+                                <textarea asp-for="CommentDetail" cols="40" rows="5" autofocus placeholder="請輸入評論摘要...."></textarea>
+                                <span asp-validation-for="CommentDetail" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="儲存" class="btn btn-primary" />
+                                <input type="reset" value="清除" class="btn btn-secondary" />
+                                <a asp-action="ListByAdmin" class="btn btn-warning">取消</a>
+                            </div>
+                            <div class="form-group">
+                                @using (Html.BeginForm("CreateByAdmin", "Comment", new { id = "my-form-id" }))
+                                {
+                                    <button type="button" class="btn btn-secondary" onclick="demoCommentAdmin()">Demo</button>
+                                }
+                                @ViewBag.Message
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+@section Scripts {
+    <script src="~/js/comment/commentpoint.js"></script>
+    <script>
+        function demoCommentAdmin() {
+            // 設定 Demo 評價
+            // 取得表單元素和欄位元素
+            document.getElementById("MemberId").value = "MB00006";
+            document.getElementById("CommentDetail").value = "給五星不是沒有缺點，但住四個晚上下來整體感受很不錯，下次來台北還是會列為首選。";
+            //// 提交表單
+            form.submit();
+        }
+    </script>
+    }

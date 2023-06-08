@@ -1,0 +1,81 @@
+﻿@model HotelOrderFinal.Models.Discount
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        @*  <div class="page-cover text-center">
+        <h2 class="page-cover-tittle">About Us</h2>
+        <ol class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li class="active">About</li>
+        </ol>
+        </div>*@
+    </div>
+</section>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+<h1>修改優惠內容</h1>
+
+<h4>優惠資料</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" name="DiscountId" value="@Model.DiscountId" />
+
+           @* <div class="form-group">
+                <label asp-for="DiscountId" class="control-label"></label>
+                <input asp-for="DiscountId" class="form-control" />
+                <span asp-validation-for="DiscountId" class="text-danger"></span>
+            </div>*@
+
+            <div class="form-group">
+                <label asp-for="DiscountName" class="control-label">優惠名稱</label>
+                <input asp-for="DiscountName" class="form-control" />
+                <span asp-validation-for="DiscountName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiscountImage" class="control-label">優惠圖片</label>
+                <input asp-for="DiscountImage" class="form-control" />
+                <span asp-validation-for="DiscountImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiscountDirections" class="control-label">優惠詳細</label>
+                <input asp-for="DiscountDirections" class="form-control" />
+                <span asp-validation-for="DiscountDirections" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="DiscountDiscount" class="control-label">優惠折扣</label>
+                <input asp-for="DiscountDiscount" class="form-control" />
+                <span asp-validation-for="DiscountDiscount" class="text-danger"></span>
+            </div>
+@*            <div class="form-group">
+                <label asp-for="MemberId" class="control-label"></label>
+                <input asp-for="MemberId" class="form-control" />
+                <span asp-validation-for="MemberId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label class="control-label">優惠照片</label>
+                <input type="file" name="photo" class="form-control" />
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="儲存" class="btn btn-primary" />
+                <button type="button" onclick="location.href='@Url.Action("List")'" class="btn btn-secondary">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

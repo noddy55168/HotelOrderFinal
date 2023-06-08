@@ -1,0 +1,60 @@
+﻿.Testnavtabsmiddle {
+    margin-left: 350px;
+}
+
+.Testnavtabsmiddle1 {
+    margin-left: 100px;
+}
+
+.buttonwidth {
+    width: 20%;
+}
+
+.buttonwidthL {
+    width: 70%;
+}
+
+.newcontainer {
+    width: 400px;
+    /*height:250px;  */
+    border: 2px solid #4F4F4F;
+    border-radius: 10px;
+    background-color: rgba(249, 249, 255, 0.102);
+    padding: 15px 30px 15px;
+    color: #fff;
+}
+
+.bgimg {
+    background: url("../../image/Nordic.jpg") no-repeat scroll center 0/cover;
+    opacity: 0.50;
+}
+
+.mycol {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 0;
+    max-width: 100%;
+}
+
+/*原先是由hotel->refine-map-body->info
+    改寫版本為:tab-pane fade show active->d-flex justify-content-center->myinfo
+*/
+
+
+.myinfo {
+    border: 2px solid #222;
+    height: 480px;
+    float: left;
+    padding: 30px 43px 22px;
+    text-align: left;
+    width:400px;
+}
+.name{
+    color:#272727;
+
+}
+.middle
+{
+
+}

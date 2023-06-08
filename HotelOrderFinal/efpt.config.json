@@ -1,0 +1,121 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "HotelOrderContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "HotelOrderFinal",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[Activity]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Admin]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Comment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Discount]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DiscountDetail]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HotelFacility]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HotelIndustry]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HotelRegionName]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MultipleHotelFacility]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MultipleRoomFacility]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Order]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrderDetail]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrderDetailStatus]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrderSpecialRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Payment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Room]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RoomAdmin]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RoomClass]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RoomFacility]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RoomMember]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SpecialRequest]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "msitxxx-sxx.HotelOrder.dbo",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

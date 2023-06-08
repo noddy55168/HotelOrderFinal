@@ -1,0 +1,184 @@
+﻿@model IEnumerable<HotelOrderFinal.Models.RoomClass>
+
+@{
+    ViewData["Title"] = "AdminRoom";
+
+}
+<style>
+    .table td {
+        overflow: hidden; /* 隐藏溢出内容 */
+        text-overflow: ellipsis; /*使用省略号表示溢出内容 */
+        white-space: normal;
+        height: 90px;
+    }
+
+    .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .image-container img {
+            margin-right: 10px; /* 設置圖片間的右邊距，可根據需要進行調整 */
+        }
+
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3; /* 設置顯示的最大行數 */
+        overflow: hidden;
+    }
+
+</style>
+<link rel="stylesheet" href="~/css/ForAdminTable.css">
+
+@* <h2 class="page-cover-tittle">後台管理系統：房型管理</h2>*@
+
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">後台管理系統：房型管理</h2>
+        </div>
+    </div>
+</section>
+<div class="Adminwrapper">
+    <div class="row">
+        <div class="col-xs-12 col-md-2">
+            <div class=" ">
+                <div class=" ">
+                    <div class="">
+                        @{
+                            var AdminId = Context.Session.GetString("AdminId");
+                        }
+
+                    </div>
+                </div>
+                <div class="">
+                    <h2 style="text-align: center">
+                        @Html.ActionLink(AdminId, "List", "Admin")
+                    </h2>
+                    <ul class="list" style="list-style: none; padding: 0;">
+
+                        <!--改成手風琴下拉式-->
+                        <li>
+                            @Html.ActionLink("會員管理", "List", "MemberMange", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("房型管理", "AdminRoom", "Room", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("活動管理", "ActivityByCreate", "Activity", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("訂房管理", "EditPassword", "Member", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("飯店一覽管理", "ListView", "HotelIndustry", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("優惠折扣管理", "List", "Discount", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("評論管理", "ListByAdmin", "Comment", null, new { @class = "nav-link Adminbutton  d-flex justify-content-center" })
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="selectedItemContent" class="col-xs-12 col-md-10 ">
+            <!-- 這裡會顯示點選的項目的內容 -->
+
+
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            風格編號
+                        </th>
+                        <th>
+                            名稱
+                        </th>
+                        <th>
+                            坪數
+                        </th>
+                        <th>
+                            人數
+                        </th>
+                        <th>
+                            詳細
+                        </th>
+                        <th>
+                            房間照片
+                        </th>
+                        @*<th>
+                        照片2
+                        </th>
+                        <th>
+                        照片3
+                        </th>*@
+                        <th>
+                            平日價格
+                        </th>
+                        <th>
+                            假日價格
+                        </th>
+                        <th>
+                            加人數價格
+                        </th>
+                        <th><a asp-action="Create" class="btn btn-primary">新增房間</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var customOrder = new List<string> { "簡奢", "山嵐", "日式", "北歐", "城堡", "總統" };
+                        foreach (var item in Model.OrderBy(x => customOrder.FindIndex(c => x.RoomClassName.Contains(c))))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RoomClassId)
+                                </td>
+                                <td style="white-space: nowrap;">
+                                    @Html.DisplayFor(modelItem => item.RoomClassName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RoomClassSize)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RoomClassPeople)
+                                </td>
+                                <td class="line-clamp-2" title="@item.RoomClassDetail">
+                                    @Html.DisplayFor(modelItem => item.RoomClassDetail)
+                                </td>
+                                <td>
+                                    <div class="image-container">
+                                        <img src="~/image/room/@item.RoomClassPhoto1" width="60" height="45">
+                                        <img src="~/image/room/@item.RoomClassPhoto2" width="60" height="45">
+                                        <img src="~/image/room/@item.RoomClassPhoto3" width="60" height="45">
+                                    </div>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.WeekdayPrice)
+                                </td>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.HolidayPrice)
+                                </td>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.AddPrice)
+                                </td>
+                                <td>
+
+                                        @Html.ActionLink("修改", "Edit", new {id=item.RoomClassId},new { @class="btn btn-success" })
+                                        @*@Html.ActionLink("刪除", "Delete", new {id=item.RoomClassId},new { @class="btn btn-danger", onclick=$"return confirm('{confirmMessage}')"})*@
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>

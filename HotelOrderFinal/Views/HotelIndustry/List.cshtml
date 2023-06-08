@@ -1,0 +1,465 @@
+﻿@model IEnumerable<HotelOrderFinal.Models.HotelIndustry>
+
+@{
+    //Layout = "_Layout";
+    ViewData ["Title"] = "List";
+}
+
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area">
+    <div class="overlay bgimg" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h1 class="page-cover-tittle">尋找飯店</h1>
+            <ol class="breadcrumb">
+                <li><h5>找到專屬於您的最佳選擇</h5></li>
+            </ol>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
+<!--================ Facilities Area  =================-->
+@*<section class="facilities_area section_gap">
+*@<section class="accomodation_area section" style="background-color:#f2f2f2">
+    @*<section class="testimonial_area section_gap">*@
+    @*背景圖*@
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background="">
+    </div>
+    @*分頁*@
+    @*在class中nav應該是有flex標籤 用於啟動justify-content-center置中 *@
+    <nav>
+        <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist" style="border-block-color:#343A40">
+            <button class="nav-link active" id="nav-home-tab" style="width:20%;" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">由地圖尋找</button>
+            <button class="nav-link " id="nav-profile-tab" style="width:20%;" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">由地區篩選</button>
+        </div>
+    </nav>
+    @*分頁下的內容*@
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="d-flex justify-content-center" style="padding-bottom:10px; padding-top:10px;">
+                @*<iframe src="https://www.google.com/maps/d/embed?mid=1J4qA06_2AVU2zKFMINRSFG-f-CQhIGA&ehbc=2E312F" width="640" height="480"></iframe>*@
+                <!--Google map api 囤放處-->
+                <div id="map" style="width:640px; height:480px; border:2px solid black; "></div>
+                <div></div>
+                <!--詳細資料展現處-->
+                <div class="myinfo" style="display:none" ;>
+                    <div class="hotel_link">
+                        <img src= style="block;">
+                        <h2 class="name d-flex justify-content-center"></h2>
+                        <div class="middle d-flex justify-content-center"></div>
+                        @*<br /><br /><br /><br />*@
+                    </div>
+                    <div class="bottom d-flex justify-content-center">
+                        <a href="@Url.Action("List", "Order")" class="btn btn-dark" role="button">我要訂房!</a>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                @* <a href="@Url.Action("List", "Order")" class="btn btn-dark" role="button">我要訂房!</a>*@
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            @*手風琴*@
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <div class="d-flex justify-content-center" style="padding-top:10px;">
+                        <button id="btn1" class="accordion-button collapsed" type="button" style="width:75%; height:50px; font-size:25px;" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" data-hotelregionid="1">
+                            北部
+                        </button>
+                    </div>
+                </div>
+                @*手風琴內容*@
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        @*容器 排版未處理完*@
+                        <div class=" d-flex justify-content-center">
+                            <div id="map1" style="width:65%; height:480px;"></div>
+                        </div>
+                        <br />
+                        <div id="hoteldata1" class="mx-auto row d-flex justify-content-center" style="background-color:#efefef">
+                        </div>
+                        @*容器*@
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="d-flex justify-content-center" style="padding-top:10px;">
+                    <button id="btn2" class="accordion-button collapsed" type="button" style="width:75%; height:50px; font-size:25px;" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo" data-hotelregionid="2">
+                        中部
+                    </button>
+                </div>
+            </div>
+            @*手風琴內容*@
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    @*容器*@
+                    <div class=" d-flex justify-content-center">
+                        <div id="map2" style="width:65%; height:480px;"></div>
+                    </div>
+                    <br />
+                    <div id="hoteldata2" class="mx-auto row d-flex justify-content-center" style="background-color:#efefef">
+                    </div>
+                    @*容器*@
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="d-flex justify-content-center" style="padding-top:10px; padding-bottom:5px;">
+                    <button id="btn3" class="accordion-button collapsed" type="button" style="width:75%; height:50px; font-size:25px;" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree" data-hotelregionid="3">
+                        南部
+                    </button>
+                </div>
+            </div>
+            @*手風琴內容*@
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    @*容器*@
+                    <div class=" d-flex justify-content-center">
+                        <div id="map3" style="width:65%; height:480px;"></div>
+                    </div>
+                    <br />
+                    <div id="hoteldata3" class="mx-auto row d-flex justify-content-center" style="background-color:#efefef	">
+                    </div>
+                    @*容器*@
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ Facilities Area  =================-->
+<!--================ Testimonial Area  =================-->
+@section Scripts{
+
+    <script>
+        function catchid1() {
+            //抓hotelregionid
+            $('#btn1').on('click', function (event) {
+
+                var hotelRegionId = $(event.target).data('hotelregionid');
+                //字串插值apiUrl
+                //var mapapiUrl = "https://localhost:7007/api/APIHotelIndustry/"; 舊寫法 這裡會給出的是APIHotelIndustry...
+                var apiUrl = `https://localhost:7007/api/APIHotelIndustry/get/${hotelRegionId}`;
+                //僅輸出符合api所設參數的內容
+                $.ajax({
+                    url: apiUrl,
+                    method: 'Get',
+                    success: function (data) {
+                        $("#hoteldata1").empty(); //清空之前的資料
+                        for (var i = 0; i < data.length; i++) {
+                            $("#hoteldata1").append(
+                                '<div class="mycol">' +
+                                '<div class="mycol container" >' +
+                                '<div id = "hotelupload1" class= "newcontainer  text-center" >' +
+                                '<h1 style="color:black;">' + data[i].hotelName + '</h1>' +
+                                '<img src="/image/' + data[i].hotelImage + ' "  width = "320" height = "240" />' +
+                                '<br>' + '<p style="color:black;">' +
+                                data[i].hotelAddress + '</p>' +
+                                '<br>' + '<p style="color:black;">' +
+                                data[i].hotelImageDiscription + '</p>' +
+                                '<a href="@Url.Action("List", "Order")" class="btn btn-dark" role="button">我要訂房!</a>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>'
+                            );
+                        }
+                    }
+                });
+
+            });
+        }
+        function catchid2() {
+            //抓hotelregionid
+            $('#btn2').on('click', function (event) {
+
+                var hotelRegionId = $(event.target).data('hotelregionid');
+                //字串插值apiUrl
+                var apiUrl = `https://localhost:7007/api/APIHotelIndustry/get/${hotelRegionId}`;
+                //僅輸出符合api所設參數的內容
+                $.ajax({
+                    url: apiUrl,
+                    method: 'Get',
+                    success: function (data) {
+                        $("#hoteldata2").empty(); //清空之前的資料
+                        for (var i = 0; i < data.length; i++) {
+                            $("#hoteldata2").append(
+                                '<div class="mycol">' +
+                                '<div class="container" >' +
+                                '<div id = "hotelupload2" class= "newcontainer  text-center">' +
+                                '<h1 style="color:black;">' + data[i].hotelName + '</h1>' +
+                                '<img src="/image/' + data[i].hotelImage + ' "  width = "320" height = "240" />' +
+                                '<br>' + '<p style="color:black;">' + data[i].hotelAddress + '</p>' +
+                                '<br>' + '<p style="color:black;">' +
+                                data[i].hotelImageDiscription + '</p>' +
+                                '<a href="@Url.Action("List", "Order")" class="btn btn-dark" role="button">我要訂房!</a>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>'
+                            );
+                        }
+                    }
+                });
+            });
+        }
+        function catchid3() {
+            //抓hotelregionid
+            $('#btn3').on('click', function (event) {
+                var hotelRegionId = $(event.target).data('hotelregionid');
+                //字串插值apiUrl
+                var apiUrl = `https://localhost:7007/api/APIHotelIndustry/get/${hotelRegionId}`;
+                //僅輸出符合api所設參數的內容
+                $.ajax({
+                    url: apiUrl,
+                    method: 'Get',
+                    success: function (data) {
+                        $("#hoteldata3").empty(); //清空之前的資料
+                        for (var i = 0; i < data.length; i++) {
+                            $("#hoteldata3").append(
+                                '<div class="mycol">' +
+                                '<div class="container" >' +
+                                '<div id="hotelupload3"class= "newcontainer text-center">' +
+                                '<h1 style="color:black;">' + data[i].hotelName + '</h1>' +
+                                '<img src="/image/' + data[i].hotelImage + ' "  width = "320" height = "240" />' +
+                                '<br>' + '<p style="color:black;">' + data[i].hotelAddress + '</p>' +
+                                '<br>' + '<p style="color:black;">' +
+                                data[i].hotelImageDiscription + '</p>' +
+                                '<a href="@Url.Action("List", "Order")" class="btn btn-dark" role="button">我要訂房!</a>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>'
+                            );
+                        }
+                    }
+                });
+            });
+        }
+
+        document.getElementById('btn1').addEventListener('click', catchid1())
+        document.getElementById('btn2').addEventListener('click', catchid2())
+        document.getElementById('btn3').addEventListener('click', catchid3())
+
+
+        //catchid1()
+        //catchid2()
+        //catchid3()
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        //google maps api
+        // 初始化+載入地圖
+        //function initMap() {
+        //     地圖位置 {}為座標 抓取座標的方式:google地圖 對要的地方右鍵選:這是哪裡
+        //    const taiwan = { lat: 23.739768, lng: 120.937298 };
+        //     The map, centered at Uluru
+        //    const map = new google.maps.Map(document.getElementById("map"), {
+        //        zoom: 7,
+        //        center: taiwan,
+        //    });
+        //     圖標, 對應地圖(飯店要)設置的位置
+        //    const marker = new google.maps.Marker({
+        //        position: taiwan,
+        //        map: map,
+        //    });
+        //}
+        //window.initMap = initMap;
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+        var mapapiUrl = "https://localhost:7007/api/APIHotelIndustry/get";
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 7,
+                center: new google.maps.LatLng(23.739768, 120.937298),
+            });
+            // 創建 Google Maps 地圖實例，設置縮放級別和中心點座標
+
+            fetch(mapapiUrl, { method: 'Get' }) // 使用 fetch 函式發起 GET 請求，獲取資料
+                .then((response) => response.json()) // 將回傳的響應轉換成 JSON 格式
+                .then(data => { // 處理獲取到的資料
+                    console.log("Data:", data);
+                    data.forEach((location) => { // 使用 forEach 迴圈迭代資料陣列中的每個項目
+                        const { lat, lng, hotelId } = location; // 從項目中獲取緯度和經度
+                        const position = new google.maps.LatLng(lat, lng); // 創建 Google Maps 的 LatLng 物件，表示地點的座標
+                        const markerId = hotelId;
+                        console.log("hotelId is", markerId)
+                        const marker = new google.maps.Marker({ position: position, map: map, });
+                        marker.addListener("click", function () {
+                            const matchingData = data.find(item => item.hotelId === hotelId);
+                            const matchinImage = '/image/' + matchingData.hotelImage;
+
+                            if (matchingData != null) {
+                                //console.log("Clicked on Marker with HotelId", hotelId)
+                                //console.log("matchingData is", matchingData)
+                                //console.log("matchingData is", matchingData.hotelName)
+                                //console.log(matchinImage)
+                                /////////////////////////////////////////////////////////////////
+                                $(".myinfo .hotel_link img").attr("src", matchinImage);
+                                //決定是否輸出照片
+                                if (matchingData.hotelImage == "") {
+                                    $(".myinfo .hotel_link img").css("display", "none");
+                                } else {
+                                    $(".myinfo").css({
+                                        "display": "block",
+                                        "border-right": "2px solid #222",
+                                        "border-bottom": "2px solid #222",
+                                        "border-top": "2px solid #222",
+                                        "height": "480px",
+                                        "float": "left",
+                                        "padding": "31px 43px 22px",
+                                        "text-align": "left",
+                                        "width": "400px",
+                                        "color": "black",
+                                    });
+                                    $(".myinfo .hotel_link img").css({
+                                        "display": "block",
+                                        "width": "305px",
+                                        "height": "150px",
+                                    });
+                                }
+                                $(".myinfo .hotel_link .name").text(matchingData.hotelName)
+                                $(".myinfo .hotel_link .middle").html(matchingData.hotelAddress + "<br /><br />" + matchingData.hotelImageDiscription);
+
+                            }
+                            else {
+                                console.log("Problem:", Error)
+                            }
+                        })
+
+                    });
+                })
+                .catch((error) => { // 處理請求發生的錯誤
+                    console.log("Fetch Error:", error);
+                });
+        }
+        //window.initMap = initMap; // 將 initMap 函式指定為全局變數，使其能夠在載入 Google Maps API 時被調用
+        ///////////////////////////////配合各區域的map
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        //王子大飯店參考寫法，為動態顯示圖標所對應的資料 使用了JQuery
+        //function selectMarker(i) {
+        //    marker[i].addListener('click', function () { // 為第 i 個標記添加點擊事件監聽器 原先相關的寫法是將data以陣列的形式輸出(不確定是否能用像我一樣的寫法，或者可以考慮用hotelId對應?)
+        //        // 設定 .info-->.hotel_link-->img區塊的內容, 透過attr在"img下"加入"src"並導入markerdata[i]['img']
+        //        $(".info .hotel_link img").attr("src", markerdata[i]['img']);
+        //        //決定是否輸出照片
+        //        if (markerdata[i]['img'] == "") {
+        //            $(".info .hotel_link img").css("display", "none");
+        //        } else {
+        //            $(".info .hotel_link img").css("display", "block");
+        //        }
+        //        //輸出飯店名字? slice為擷取陣列中的某個資料
+        //        $(".info .name a").text(markerdata[i]['name'].slice(markerdata[i]['name'].indexOf("-", 3) + 1));
+        //        //輸出飯店敘述與地址 此處為class:middle區塊
+        //        $(".info .middle .lead").html(markerdata[i]['post_code'] + " " + markerdata[i]['address'] + "<br /><br />" + markerdata[i]['description']);
+        //        //輸出底下的飯店電話按鈕 此處為class:bottom區塊
+        //        $(".info .bottom .tel .pc-fix").text("電話予約：" + markerdata[i]['tel']);
+        //        //輸出空房or飯店電話相關?
+        //        $(".info .bottom .tel .sp-fix a").attr("href", "tel:" + markerdata[i]['tel']);
+        //        $(".info .hotel_link").each(function () {
+        //            $(this).attr("href", "/" + markerdata[i]['id'] + "/");
+        //        });
+        //        // 根據條件顯示或隱藏 .info 區塊中的元素
+        //        if (removeReserveIds.includes(markerdata[i]['id']) == true) {
+        //            $(".info .bottom .reserve").hide();
+        //        } else {
+        //            $(".info .bottom .reserve").show();
+        //        }
+        //        //輸出空房預約按鈕?
+        //        $(".info .bottom .reserve p").html('<a href="javascript:void(0)" data-hid="' + markerdata[i]['hid'] + '" data-area="' + markerdata[i]['area'] + '" data-hotelid="' + markerdata[i]['id'] + '" class="reserve-button">空室検索・宿泊予約</a>');
+        //        //css排版相關
+        //        $(".refine-map-body .map").css("width", "882px");
+        //        $(".refine-map-body .info").css("display", "block");
+        //    });
+        //}
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        //function myselectMark() {
+            //fetch(mapapiUrl,{method:'Get'})
+            //.then((response)=>Response.json())
+            //        .then(data => {
+            //            console.log("myselectMark's:",data);
+            //        data.addListener
+            //        }
+        //}
+        //////////////////////////////////////////////////////////////////////////////////////////////
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCu2MdiX8Qb7KWkqfIembmElinOcl-GgWE&callback=initMap"></script>
+    <script>
+        function initMap1() {
+            const map = new google.maps.Map(document.getElementById("map1"), {
+                zoom: 10,
+                center: new google.maps.LatLng(24.88577858311454, 121.52141365726166),
+            });
+            // 創建 Google Maps 地圖實例，設置縮放級別和中心點座標
+
+            fetch(mapapiUrl, { method: 'Get' }) // 使用 fetch 函式發起 GET 請求，獲取資料
+                .then((response) => response.json()) // 將回傳的響應轉換成 JSON 格式
+                .then(data => { // 處理獲取到的資料
+                    console.log("Data:", data);
+                    data.forEach((location) => { // 使用 forEach 迴圈迭代資料陣列中的每個項目
+                        const { lat, lng } = location; // 從項目中獲取緯度和經度
+                        const position = new google.maps.LatLng(lat, lng); // 創建 Google Maps 的 LatLng 物件，表示地點的座標
+                        new google.maps.Marker({ // 創建地圖標記物件
+                            position: position, // 設定標記的位置座標
+                            map: map, // 將標記加入地圖
+                        });
+                    });
+                })
+                .catch((error) => { // 處理請求發生的錯誤
+                    console.log("Fetch Error:", error);
+                });
+        }
+        initMap1()
+
+        function initMap2() {
+            const map = new google.maps.Map(document.getElementById("map2"), {
+                zoom: 10,
+                center: new google.maps.LatLng(24.128982813655696, 120.66686597596934),
+            });
+            // 創建 Google Maps 地圖實例，設置縮放級別和中心點座標
+
+            fetch(mapapiUrl, { method: 'Get' }) // 使用 fetch 函式發起 GET 請求，獲取資料
+                .then((response) => response.json()) // 將回傳的響應轉換成 JSON 格式
+                .then(data => { // 處理獲取到的資料
+                    console.log("Data:", data);
+                    data.forEach((location) => { // 使用 forEach 迴圈迭代資料陣列中的每個項目
+                        const { lat, lng } = location; // 從項目中獲取緯度和經度
+                        const position = new google.maps.LatLng(lat, lng); // 創建 Google Maps 的 LatLng 物件，表示地點的座標
+
+                        new google.maps.Marker({ // 創建地圖標記物件
+                            position: position, // 設定標記的位置座標
+                            map: map, // 將標記加入地圖
+                        });
+                    });
+                })
+                .catch((error) => { // 處理請求發生的錯誤
+                    console.log("Fetch Error:", error);
+                });
+        }
+        initMap2()
+
+        function initMap3() {
+            const map = new google.maps.Map(document.getElementById("map3"), {
+                zoom: 10,
+                center: new google.maps.LatLng(22.843186840520087, 120.35690098300554),
+            });
+            // 創建 Google Maps 地圖實例，設置縮放級別和中心點座標
+
+            fetch(mapapiUrl, { method: 'Get' }) // 使用 fetch 函式發起 GET 請求，獲取資料
+                .then((response) => response.json()) // 將回傳的響應轉換成 JSON 格式
+                .then(data => { // 處理獲取到的資料
+                    console.log("Data:", data);
+                    data.forEach((location) => { // 使用 forEach 迴圈迭代資料陣列中的每個項目
+                        const { lat, lng } = location; // 從項目中獲取緯度和經度
+                        const position = new google.maps.LatLng(lat, lng); // 創建 Google Maps 的 LatLng 物件，表示地點的座標
+
+                        new google.maps.Marker({ // 創建地圖標記物件
+                            position: position, // 設定標記的位置座標
+                            map: map, // 將標記加入地圖
+                        });
+                    });
+                })
+                .catch((error) => { // 處理請求發生的錯誤
+                    console.log("Fetch Error:", error);
+                });
+        }
+        initMap3()
+    </script>
+}
